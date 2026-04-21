@@ -27,16 +27,16 @@ requirements-*.txt
 
 ## Installation
 
+Install a PyTorch build that matches your platform first. The examples below use CPU wheels. If you use CUDA, replace the PyTorch install command with the matching command from the official PyTorch selector.
+
 ### Linux
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-pip install -r requirements-scrna.txt
-pip install -r requirements-priors.txt
-pip install -r requirements-spatial.txt
-pip install -r requirements-hetero.txt
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt
 ```
 
 ### Windows PowerShell
@@ -45,10 +45,8 @@ pip install -r requirements-hetero.txt
 py -3 -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install -r requirements-scrna.txt
-pip install -r requirements-priors.txt
-pip install -r requirements-spatial.txt
-pip install -r requirements-hetero.txt
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt
 ```
 
 ## Expected Directories
@@ -59,6 +57,8 @@ The configs use repository-relative paths. Before running experiments, place dat
 - `data/` for auxiliary assets used by specific preprocessing or pretraining steps
 - `outputs/` for generated manifests, graphs, checkpoints, and reports
 - `logs/` for run logs
+
+The legacy split files `requirements-scrna.txt`, `requirements-priors.txt`, `requirements-spatial.txt`, and `requirements-hetero.txt` are retained, but `requirements.txt` is the recommended entry point.
 
 ## Minimal Smoke Test
 
