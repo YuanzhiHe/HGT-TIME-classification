@@ -1,0 +1,27 @@
+# Multimodal contrastive pretraining on HEST-1k
+# ~1,276 samples, 26 organs, multi-platform (Visium/Visium HD/Xenium)
+
+data:
+  stbank_dir: null
+  hest1k_dir: null  # Set to actual path after download
+  hest1k_sample_ids: null  # null = all samples; or list specific IDs
+  n_genes: 2000
+
+model:
+  image_backbone: "vit_base_patch16_224"
+  embed_dim: 512
+  expr_hidden_dim: 512
+  expr_n_layers: 3
+  expr_dropout: 0.1
+  init_temp: 0.07
+  freeze_image_backbone: false
+
+batch_size: 128  # Smaller than ST-bank due to h5ad loading overhead
+epochs: 30
+learning_rate: 1.0e-4
+weight_decay: 1.0e-4
+min_lr: 1.0e-6
+num_workers: 4
+img_size: 224
+save_every: 5
+output_dir: "outputs/pretrain/hest1k"

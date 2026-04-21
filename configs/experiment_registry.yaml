@@ -1,0 +1,198 @@
+# ============================================================
+# Experiment Registry — TIME Classification Baselines & Main Model
+# ============================================================
+# This file is the single source of truth for all experiment IDs,
+# model families, config paths and their role in the comparison matrix.
+#
+# Roles:
+#   main        — the proposed HGT-TIME model
+#   baseline    — a comparison baseline
+#   ablation    — an ablation variant of the main model (populated in Task 23)
+#
+# All experiments share:
+#   - The same graph data directory (input.graphs_dir)
+#   - The same patient-level stratified grouped k-fold split
+#   - The same evaluation metrics pipeline
+#   - The same random seed set for reproducibility
+# ============================================================
+
+defaults:
+  graphs_dir: "outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs"
+  seeds: [42, 123, 2026]
+  n_folds: 5
+  inner_folds: 3
+  split_unit: "graph_id"
+  eval_metrics:
+    - macro_auroc
+    - macro_f1
+    - balanced_accuracy
+    - macro_auprc
+    - brier_score
+    - ece
+    - excluded_to_hot_confusion
+  primary_metric: "macro_auroc"
+  output_root: "outputs/results"
+
+experiments:
+  # ----------------------------------------------------------------
+  # Layer 1: Clinical minimum-bar baselines (linear deconvolution)
+  # ----------------------------------------------------------------
+  - id: "EXP-B01-LINEAR"
+    name: "Linear Deconvolution (CIBERSORTx-like)"
+    model_family: "linear_deconvolution"
+    role: "baseline"
+    layer: 1
+    config: "configs/baseline_linear_deconv.yaml"
+    description: >
+      Single linear layer mapping pseudo-bulk expression profiles to
+      TIME class logits. Mimics CIBERSORTx-style linear projection.
+      No graph structure, no non-linearity.
+
+  # ----------------------------------------------------------------
+  # Layer 2: Non-linear non-graph baselines
+  # ----------------------------------------------------------------
+  - id: "EXP-B02-MLP"
+    name: "Non-Graph MLP (Scaden-like)"
+    model_family: "non_graph"
+    role: "baseline"
+    layer: 2
+    config: "configs/baseline_non_graph_mlp.yaml"
+    description: >
+      Multi-layer perceptron on mean-pooled cell features (pseudo-bulk).
+      Tests whether non-linear feature extraction without graph structure
+      suffices for TIME classification.
+
+  # ----------------------------------------------------------------
+  # Layer 3: Homogeneous graph baselines
+  # ----------------------------------------------------------------
+  - id: "EXP-B03-GCN"
+    name: "Homogeneous GCN (spatial-only)"
+    model_family: "homogeneous_graph"
+    role: "baseline"
+    layer: 3
+    config: "configs/baseline_homo_gcn.yaml"
+    description: >
+      Standard GCN on homogeneous cell-cell spatial graph.
+      Tests whether simple message passing on spatial topology
+      captures TIME-relevant signals without heterogeneous node types.
+
+  - id: "EXP-B04-GAT"
+    name: "Homogeneous GAT (spatial-only)"
+    model_family: "homogeneous_graph"
+    role: "baseline"
+    layer: 3
+    config: "configs/baseline_homo_gat.yaml"
+    description: >
+      Graph Attention Network on homogeneous cell-cell spatial graph.
+      Tests whether attention-based message passing on homogeneous graphs
+      approaches heterogeneous graph performance.
+
+  # ----------------------------------------------------------------
+  # Main model
+  # ----------------------------------------------------------------
+  - id: "EXP-M01-HGT"
+    name: "HGT-TIME (proposed)"
+    model_family: "hgt_time"
+    role: "main"
+    layer: 4
+    config: "configs/hgt_time.default.yaml"
+    description: >
+      Heterogeneous Graph Transformer integrating cell, gene and pathway
+      nodes with spatial adjacency, PPI and KEGG edges. The proposed model
+      with classification, phenotype regression and target ranking heads.
+
+  # ----------------------------------------------------------------
+  # Ablation experiments — H1: Spatial information
+  # ----------------------------------------------------------------
+  - id: "EXP-A01-NO-SPATIAL"
+    name: "Ablation: No Spatial Edges"
+    model_family: "hgt_time"
+    role: "ablation"
+    hypothesis: "H1"
+    config: "configs/ablation_h1_no_spatial.yaml"
+    description: >
+      Remove all cell-cell spatial edges from the heterogeneous graph.
+      Tests whether spatial adjacency is necessary for TIME classification.
+      Expected: macro-AUROC drops, Excluded→Hot confusion rises.
+
+  - id: "EXP-A02-PERM-SPATIAL"
+    name: "Ablation: Permuted Spatial Edges"
+    model_family: "hgt_time"
+    role: "ablation"
+    hypothesis: "H1"
+    config: "configs/ablation_h1_permute_spatial.yaml"
+    description: >
+      Randomly permute cell-cell spatial edge endpoints while preserving
+      edge count. Tests whether the benefit comes from true local spatial
+      topology rather than graph density alone.
+
+  # ----------------------------------------------------------------
+  # Ablation experiments — H2: Heterogeneous schema
+  # ----------------------------------------------------------------
+  - id: "EXP-A03-NO-PATHWAY"
+    name: "Ablation: No Pathway Nodes"
+    model_family: "hgt_time"
+    role: "ablation"
+    hypothesis: "H2"
+    config: "configs/ablation_h2_no_pathway.yaml"
+    description: >
+      Remove all pathway nodes and gene-pathway edges. Tests whether
+      pathway-level aggregation provides independent value beyond
+      gene-level features and PPI edges.
+
+  - id: "EXP-A04-NO-PPI"
+    name: "Ablation: No PPI Edges"
+    model_family: "hgt_time"
+    role: "ablation"
+    hypothesis: "H2"
+    config: "configs/ablation_h2_no_ppi.yaml"
+    description: >
+      Remove all gene-gene PPI (STRING) interaction edges. Tests whether
+      PPI prior edges regularize gene embeddings and stabilize target
+      ranking independently of pathway structure.
+
+  - id: "EXP-A05-HOMO"
+    name: "Ablation: Homogeneous Collapse"
+    model_family: "homogeneous_graph"
+    role: "ablation"
+    hypothesis: "H2"
+    config: "configs/ablation_h2_homo_collapse.yaml"
+    description: >
+      Collapse the heterogeneous graph to a cell-only spatial graph and
+      use GCN instead of HGT. Tests the full value of heterogeneous
+      schema + typed attention vs. a standard spatial GNN.
+
+  # ----------------------------------------------------------------
+  # Ablation experiments — H3: Target ranking
+  # ----------------------------------------------------------------
+  - id: "EXP-A06-NO-RANKING"
+    name: "Ablation: No Ranking Loss"
+    model_family: "hgt_time"
+    role: "ablation"
+    hypothesis: "H3"
+    config: "configs/ablation_h3_no_ranking.yaml"
+    description: >
+      Disable ranking loss (ranking_weight=0) while keeping the full
+      heterogeneous graph. Tests whether the graph-native pairwise
+      ranking objective improves classification stability and produces
+      interpretable gene/pathway importance rankings.
+
+# ----------------------------------------------------------------
+# Result summary table schema
+# ----------------------------------------------------------------
+result_table_columns:
+  - experiment_id
+  - model_family
+  - split_protocol
+  - seed
+  - fold
+  - macro_auroc
+  - macro_f1
+  - balanced_accuracy
+  - macro_auprc
+  - brier_score
+  - ece
+  - excluded_to_hot_confusion
+  - train_loss_final
+  - val_loss_final
+  - notes

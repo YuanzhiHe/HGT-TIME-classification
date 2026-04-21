@@ -1,0 +1,53 @@
+# DANN-only ablation (no DICR) on Section 1
+# Tests whether DANN alone contributes to domain generalization
+
+experiment_id: EXP-DG-DANN-ONLY
+model_family: domain_generalized
+
+input:
+  graphs_dir: outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs
+
+model:
+  hidden_dim: 128
+  num_layers: 3
+  num_heads: 4
+  dropout: 0.2
+  num_classes: 3
+  pheno_dim: 4
+  use_pheno_head: true
+  use_ranking_heads: true
+  domain_generalization:
+    use_platform_dann: true
+    n_platforms: 3
+    use_patient_dann: false
+    n_patients: 10
+    use_dicr: false          # DICR disabled
+    dicr_temperature: 0.1
+    use_mdbn: false
+    dann_hidden_dim: 64
+    dann_n_layers: 2
+    dann_dropout: 0.1
+    dann_alpha: 1.0
+    lambda_platform: 0.1
+    lambda_patient: 0.05
+    lambda_dicr: 0.0        # zeroed out
+
+loss:
+  classification_weight: 1.0
+  phenotype_weight: 0.3
+  ranking_weight: 0.1
+  label_smoothing: 0.05
+
+runtime:
+  epochs: 100
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-5
+  batch_size: 4
+  patience: 15
+  scheduler: cosine
+  scheduler_kwargs:
+    T_max: 100
+
+split:
+  n_folds: 5
+  unit: graph_id

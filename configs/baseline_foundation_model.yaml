@@ -1,0 +1,45 @@
+# ============================================================
+# EXP-B05-FM — Foundation Model Baseline (Pretrained Encoder + MLP)
+# ============================================================
+# MLP on augmented cell features (50-dim original + 256-dim
+# pretrained CLIP embeddings = 306-dim total). Mean-pools cell
+# features per graph, classifies through a 2-layer MLP.
+# No graph structure is used — tests whether adding pretrained
+# expression embeddings to a non-graph MLP improves TIME
+# classification over the raw-feature MLP (EXP-B02).
+# ============================================================
+
+experiment_id: "EXP-B05-FM"
+
+input:
+  graphs_dir: "outputs/hetero_graph/visium_breast_regions__combined_aug/graphs"
+
+runtime:
+  batch_size: 4
+  epochs: 100
+  learning_rate: 1e-3
+  weight_decay: 1e-5
+  seed: 42
+  num_workers: 4
+  eval_every: 5
+  patience: 15
+  scheduler: "cosine"
+  scheduler_kwargs:
+    T_max: 100
+
+model_family: "foundation_model"
+
+model:
+  # input_dim auto-inferred from graph (306 for combined_aug)
+  hidden_dim: 128
+  num_classes: 3
+  dropout: 0.1
+
+loss:
+  label_smoothing: 0.1
+  class_weights: [1.0, 1.0, 1.0]
+
+split:
+  unit: "graph_id"
+  n_folds: 5
+  inner_folds: 3

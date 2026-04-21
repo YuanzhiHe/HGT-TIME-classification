@@ -1,0 +1,48 @@
+experiment_id: "EXP-LOPO-MLP"
+model_family: non_graph
+
+input:
+  graphs_dir: outputs/hetero_graph/hest1k_visium__hetero_v1/graphs
+
+runtime:
+  batch_size: 4
+  shuffle: true
+  topk: 10
+  inject_mock_targets: false
+  epochs: 100
+  learning_rate: 1e-3
+  weight_decay: 1e-5
+  seed: 42
+  num_workers: 4
+  eval_every: 1
+  patience: 15
+  scheduler: "cosine"
+  scheduler_kwargs:
+    T_max: 100
+
+model:
+  hidden_dim: 128
+  num_layers: 2
+  dropout: 0.2
+  num_classes: 2
+  pheno_dim: 4
+  use_pheno_head: false
+  use_ranking_heads: false
+
+loss:
+  classification_weight: 1.0
+  phenotype_weight: 0.0
+  region_weight: 0.0
+  ranking_weight: 0.0
+  label_smoothing: 0.05
+  class_weights: null
+
+split:
+  unit: "patient_id"
+  n_folds: 5
+  inner_folds: 3
+  keep_classes: [0, 2]
+
+targets:
+  gene_positive_ids: []
+  pathway_positive_ids: []

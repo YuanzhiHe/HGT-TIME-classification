@@ -1,0 +1,27 @@
+# Multimodal contrastive pretraining on ST-bank
+# ~2.18M image-transcriptomics pairs, 32 organs, 113 studies
+
+data:
+  stbank_dir: "data/stbank"
+  hest1k_dir: null
+  n_genes: 2000
+
+model:
+  image_backbone: "vit_small_patch16_224"   # Smaller ViT for RTX 4060 8GB
+  embed_dim: 256
+  expr_hidden_dim: 256
+  expr_n_layers: 3
+  expr_dropout: 0.1
+  init_temp: 0.07
+  freeze_image_backbone: false
+
+# Training — adjusted for RTX 4060 (8GB)
+batch_size: 32
+epochs: 5
+learning_rate: 3.0e-4
+weight_decay: 1.0e-4
+min_lr: 1.0e-6
+num_workers: 4
+img_size: 224
+save_every: 2
+output_dir: "outputs/pretrain/stbank"

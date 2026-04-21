@@ -1,0 +1,34 @@
+input:
+  graphs_dir: "outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs"
+
+runtime:
+  batch_size: 4
+  epochs: 100
+  learning_rate: 1e-3
+  weight_decay: 1e-5
+  seed: 42
+  num_workers: 4
+  eval_every: 5
+
+model_family: "homogeneous_graph" # Choices: "linear_deconvolution", "non_graph", "homogeneous_graph", "hgt_time"
+
+model:
+  input_dim: 50 # corresponds to cell node feature dimension (hetero cell node proxy)
+  hidden_dim: 64
+  num_classes: 3
+  num_layers: 2
+  dropout: 0.1
+  conv_type: "gcn" # used for homogeneous_graph, choices: "gcn", "gat"
+  heads: 2
+
+loss:
+  classification_weight: 1.0
+  phenotype_weight: 0.0 # typically 0 for baselines
+  ranking_weight: 0.0 # typically 0 for baselines
+  label_smoothing: 0.1
+  class_weights: [1.0, 1.0, 1.0]
+
+split:
+  unit: "graph_id"
+  n_folds: 5
+  inner_folds: 3

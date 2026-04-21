@@ -1,0 +1,68 @@
+dataset:
+  dataset_id: gse161529
+  input_path: datasets/gse161529/processed/input.h5ad
+  input_format: auto
+  species: human
+  gene_symbol_column: gene_symbol
+  sample_id_column: sample_id
+  patient_id_column: patient_id
+  cohort_id_column: cohort_id
+  batch_key: batch_id
+
+qc:
+  min_genes_per_cell: 200
+  max_genes_per_cell: 8000
+  min_counts_per_cell: 500
+  max_counts_per_cell: 50000
+  max_pct_mt: 20.0
+  min_cells_per_gene: 3
+  apply_mad_upper_bounds: true
+  mad_multiplier: 3.0
+  mitochondrial_prefixes: ["MT-"]
+  ribosomal_prefixes: ["RPS", "RPL"]
+  hemoglobin_prefixes: ["HB"]
+
+preprocess:
+  target_sum: 10000
+  hvg_flavor: seurat
+  n_top_genes: 3000
+  subset_to_hvg: true
+  scale_max_value: 10.0
+  n_pcs: 50
+  neighbors_k: 15
+  umap_min_dist: 0.3
+  leiden_resolution: 0.6
+  batch_correction: none
+  cluster_key: leiden
+
+annotation:
+  unknown_label: Unknown
+  min_marker_score: 0.15
+  use_reference_labels: true
+  reference_label_path: null
+  reference_label_column: seurat_cell_type
+  reference_score_column: seurat_label_score
+  reference_priority: true
+  cell_type_markers:
+    T_NK: ["CD3D", "CD3E", "TRBC1", "TRBC2", "NKG7", "IL7R"]
+    B_Plasma: ["MS4A1", "CD79A", "CD79B", "JCHAIN", "MZB1"]
+    Myeloid: ["LYZ", "LST1", "FCER1G", "TYROBP", "CTSS"]
+    CAF: ["COL1A1", "COL1A2", "DCN", "LUM", "TAGLN"]
+    Endothelial: ["PECAM1", "VWF", "KDR", "EMCN", "RAMP2"]
+    Epithelial_Malignant: ["EPCAM", "KRT8", "KRT18", "KRT19", "MUC1"]
+  cell_state_programs:
+    cytotoxic: ["NKG7", "GNLY", "PRF1", "GZMB", "IFNG"]
+    exhausted: ["PDCD1", "LAG3", "TIGIT", "HAVCR2", "CTLA4"]
+    interferon_response: ["STAT1", "ISG15", "IFIT1", "IFI6", "CXCL10"]
+    cycling: ["MKI67", "TOP2A", "TYMS", "UBE2C", "BIRC5"]
+    stromal_activation: ["COL1A1", "COL3A1", "TAGLN", "ACTA2", "THY1"]
+    epithelial_malignant: ["EPCAM", "KRT8", "KRT18", "KRT19", "ERBB2"]
+
+output:
+  root_dir: outputs/scrna/gse161529__reference_v1
+  prefix: gse161529__reference_v1
+  graph_feature_space: pca
+  graph_feature_dims: 32
+  export_h5ad: true
+  export_graph_features: true
+  export_patient_state_summary: true

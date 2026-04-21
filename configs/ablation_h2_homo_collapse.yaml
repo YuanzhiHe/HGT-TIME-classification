@@ -1,0 +1,50 @@
+# ============================================================
+# EXP-A05-HOMO — H2 Ablation: Homogeneous Collapse
+# ============================================================
+# Collapses heterogeneous graph to cell-only spatial graph,
+# then uses HomogeneousGraphClassifier (GCN) instead of HGT.
+# Tests the full value of heterogeneous schema + typed attention.
+# ============================================================
+
+experiment_id: "EXP-A05-HOMO"
+model_family: homogeneous_graph
+
+input:
+  graphs_dir: outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs
+
+ablation:
+  hypothesis: "H2"
+  description: "Collapse to homogeneous cell-only graph, use GCN"
+  transforms:
+    - homogeneous_collapse
+
+runtime:
+  batch_size: 4
+  shuffle: true
+  epochs: 100
+  learning_rate: 1e-3
+  weight_decay: 1e-5
+  seed: 42
+  num_workers: 4
+  eval_every: 1
+  patience: 15
+  scheduler: "cosine"
+  scheduler_kwargs:
+    T_max: 100
+
+model:
+  hidden_dim: 128
+  num_classes: 3
+  num_layers: 3
+  dropout: 0.2
+  conv_type: "gcn"
+  heads: 2
+
+loss:
+  label_smoothing: 0.05
+  class_weights: null
+
+split:
+  unit: "graph_id"
+  n_folds: 5
+  inner_folds: 3

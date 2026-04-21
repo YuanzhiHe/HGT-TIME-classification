@@ -1,0 +1,39 @@
+# ============================================================
+# EXP-B01-LINEAR — Linear Deconvolution Baseline
+# ============================================================
+# Mimics CIBERSORTx-like linear mapping from pseudo-bulk
+# (mean-pooled cell features) to TIME class logits.
+# ============================================================
+
+experiment_id: "EXP-B01-LINEAR"
+
+input:
+  graphs_dir: "outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs"
+
+runtime:
+  batch_size: 4
+  epochs: 100
+  learning_rate: 1e-3
+  weight_decay: 1e-5
+  seed: 42
+  num_workers: 4
+  eval_every: 5
+  patience: 15            # early stopping patience (epochs without val improvement)
+  scheduler: "cosine"     # choices: "cosine", "step", "none"
+  scheduler_kwargs:
+    T_max: 100
+
+model_family: "linear_deconvolution"
+
+model:
+  input_dim: 50           # cell PCA feature dimension
+  num_classes: 3          # Hot, Excluded, Cold
+
+loss:
+  label_smoothing: 0.1
+  class_weights: [1.0, 1.0, 1.0]
+
+split:
+  unit: "graph_id"
+  n_folds: 5
+  inner_folds: 3

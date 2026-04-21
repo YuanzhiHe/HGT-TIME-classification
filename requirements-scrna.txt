@@ -1,0 +1,9 @@
+scanpy>=1.10,<1.11
+anndata>=0.10,<0.11
+numpy>=1.26,<3
+pandas>=2.2,<3
+PyYAML>=6.0,<7
+scikit-learn>=1.4,<2
+tables>=3.9,<4
+harmonypy>=0.0.10
+bbknn>=1.6,<2

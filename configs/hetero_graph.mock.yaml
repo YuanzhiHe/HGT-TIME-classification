@@ -1,0 +1,30 @@
+{
+  "input": {
+    "dataset_id": "visium_mock",
+    "scrna_manifest_path": "outputs/mock_scrna/gse161529_mock__reference_v1/gse161529_mock__reference_v1__step-08_manifest.json",
+    "prior_manifest_path": "outputs/mock_priors/string_kegg_mock_v1/string_kegg_mock_v1__step-07_manifest.json",
+    "spatial_manifest_path": "outputs/mock_spatial/visium_mock__spatial_v1/visium_mock__spatial_v1__step-03_manifest.json",
+    "spatial_expression_path": null,
+    "spatial_expression_gene_symbol_column": "gene_symbol",
+    "assume_log1p_input": true
+  },
+  "labels": {
+    "time_label_column": "time_label",
+    "is_uncertain_column": "is_uncertain",
+    "phenotype_columns": {
+      "infiltration_score": "infiltration_score",
+      "penetration_score": "penetration_score",
+      "retention_score": "retention_score",
+      "activation_score": "activation_score"
+    }
+  },
+  "output": {
+    "root_dir": "outputs/hetero_graph/visium_mock__hetero_v1",
+    "prefix": "visium_mock__hetero_v1"
+  },
+  "validation": {
+    "min_graphs": 1,
+    "min_bags": 1,
+    "fail_below_min": false
+  }
+}

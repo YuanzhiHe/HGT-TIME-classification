@@ -1,0 +1,64 @@
+dataset:
+  dataset_id: visium_breast
+  input_path: datasets/spatial/processed/input.h5ad
+  input_format: auto
+  node_id_column: null
+  patient_id_column: patient_id
+  sample_id_column: sample_id
+  cohort_id_column: cohort_id
+  slide_id_column: slide_id
+  split_id_column: split_id
+  label_source_column: label_source
+  is_uncertain_column: is_uncertain
+  in_tissue_column: in_tissue
+  compartment_column: compartment
+  coord_x_column: array_col
+  coord_y_column: array_row
+  spatial_obsm_key: spatial
+  graph_group_fields:
+    - patient_id
+    - sample_id
+    - slide_id
+
+filters:
+  keep_in_tissue_only: true
+  drop_uncertain: false
+  min_nodes_per_graph: 8
+
+graph:
+  primary_strategy: scaled_radius
+  distance_metric: euclidean
+  symmetrize_mode: union
+  radius:
+    anchor_k: 6
+    scale_factor: 1.15
+    min_radius: null
+    max_radius: null
+    min_degree: 2
+    max_neighbors_per_source: 8
+  knn:
+    k: 6
+  delaunay:
+    max_edge_length_scale: 1.6
+    min_degree: 2
+  weights:
+    rule: gaussian
+    sigma_scale: 1.0
+    min_weight: 1.0e-6
+  permutation:
+    enabled: true
+    strategy: shuffle_coordinates
+    random_seed: 17
+  variants_to_export:
+    - scaled_radius
+    - knn
+    - delaunay
+    - permuted_primary
+
+output:
+  root_dir: outputs/spatial/visium_breast__spatial_v1
+  prefix: visium_breast__spatial_v1
+
+validation:
+  min_graphs: 5
+  fail_below_min_graphs: true

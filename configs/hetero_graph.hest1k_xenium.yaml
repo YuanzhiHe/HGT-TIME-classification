@@ -1,0 +1,45 @@
+input:
+  dataset_id: hest1k_xenium_breast
+  scrna_manifest_path: outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_manifest.json
+  prior_manifest_path: outputs/priors/string_kegg_v1/string_kegg_v1__step-07_manifest.json
+  spatial_manifest_path: outputs/spatial/hest1k_xenium__spatial_v1/hest1k_xenium__spatial_v1__step-03_manifest.json
+  spatial_expression_path: null
+  spatial_expression_gene_symbol_column: gene_symbol
+  spatial_node_id_column: null
+  assume_log1p_input: true
+
+labels:
+  time_label_column: time_label
+  is_uncertain_column: is_uncertain
+  graph_label_mode: constant_obs
+  uncertainty_margin_robust_sd: 0.0
+  phenotype_columns:
+    infiltration_score: infiltration_score
+    penetration_score: penetration_score
+    retention_score: retention_score
+    activation_score: activation_score
+
+features:
+  cell_type_column: cell_type
+  compartment_column: compartment
+  tumor_probability_column: tumor_probability
+  immune_probability_column: immune_probability
+
+schema:
+  cell_pca_dims: 32
+  cell_gene_top_k_per_cell: 64
+  max_gene_nodes_per_graph: 2048
+  min_genes_per_pathway_in_graph: 3
+  max_pathway_nodes_per_graph: 256
+
+runtime:
+  max_graphs: null
+
+output:
+  root_dir: outputs/hetero_graph/hest1k_xenium__hetero_v1
+  prefix: hest1k_xenium__hetero_v1
+
+validation:
+  min_graphs: 20
+  min_bags: 3
+  fail_below_min: false

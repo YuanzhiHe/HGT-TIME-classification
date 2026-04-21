@@ -1,0 +1,42 @@
+# ============================================================
+# EXP-B02-MLP — Non-Graph MLP Baseline (Scaden-like)
+# ============================================================
+# Multi-layer perceptron on mean-pooled cell features.
+# No graph structure. Tests non-linear feature extraction.
+# ============================================================
+
+experiment_id: "EXP-B02-MLP"
+
+input:
+  graphs_dir: "outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs"
+
+runtime:
+  batch_size: 4
+  epochs: 100
+  learning_rate: 1e-3
+  weight_decay: 1e-5
+  seed: 42
+  num_workers: 4
+  eval_every: 5
+  patience: 15
+  scheduler: "cosine"
+  scheduler_kwargs:
+    T_max: 100
+
+model_family: "non_graph"
+
+model:
+  input_dim: 50
+  hidden_dim: 128
+  num_classes: 3
+  num_layers: 3
+  dropout: 0.1
+
+loss:
+  label_smoothing: 0.1
+  class_weights: [1.0, 1.0, 1.0]
+
+split:
+  unit: "graph_id"
+  n_folds: 5
+  inner_folds: 3

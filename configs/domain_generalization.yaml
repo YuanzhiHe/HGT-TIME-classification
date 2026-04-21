@@ -1,0 +1,46 @@
+# Domain generalization configuration for HGT-TIME
+# Enables cross-platform and cross-patient OOD generalization
+
+# Domain adversarial training (DANN)
+platform_dann:
+  enabled: true
+  n_domains: 3           # Visium, Visium HD, Xenium
+  hidden_dim: 64
+  n_layers: 2
+  dropout: 0.1
+  alpha_schedule: "progressive"   # "progressive" | "constant"
+  max_alpha: 1.0
+
+patient_dann:
+  enabled: false          # Enable for patient-level invariance
+  n_domains: 50           # Max number of patients; set dynamically
+  hidden_dim: 64
+  n_layers: 2
+  dropout: 0.1
+  alpha_schedule: "progressive"
+  max_alpha: 0.5
+
+# Multi-domain batch normalization
+mdbn:
+  enabled: false          # Enable for platform-specific normalization
+  n_domains: 3
+
+# Domain-invariant contrastive regularization
+dicr:
+  enabled: true
+  temperature: 0.1
+
+# Loss weights
+loss_weights:
+  platform_dann: 0.1
+  patient_dann: 0.05
+  dicr: 0.1
+
+# OOD evaluation protocol
+ood_eval:
+  # Leave-one-platform-out
+  platform_loo: true
+  # Leave-one-patient-out
+  patient_loo: false
+  # Cross-section transfer (existing)
+  cross_section: true
