@@ -19,7 +19,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--config",
         type=Path,
-        default=Path("Experiment/core_code/configs/hgt_time.mock.yaml"),
+        default=Path("configs/hgt_time.mock.yaml"),
         help="Path to the HGT model YAML config",
     )
     return parser.parse_args()
@@ -37,7 +37,7 @@ def deep_update(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any
 def build_default_config() -> dict[str, Any]:
     return {
         "input": {
-            "graphs_dir": "Experiment/core_code/outputs/hetero_graph/visium_mock__hetero_v1/graphs",
+            "graphs_dir": "outputs/hetero_graph/visium_mock__hetero_v1/graphs",
         },
         "runtime": {
             "batch_size": 2,

@@ -28,7 +28,7 @@ def build_default_config() -> dict[str, Any]:
             "gene_pathway_weight_rule": "1 / sqrt(mapped_gene_count)",
         },
         "mapping": {
-            "gene_universe_path": "Experiment/core_code/outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_gene_panel.tsv",
+            "gene_universe_path": "outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_gene_panel.tsv",
             "gene_symbol_column": "gene_symbol",
             "ensembl_gene_column": "gene_id",
             "allow_alias_fallback": True,
@@ -63,7 +63,7 @@ def build_default_config() -> dict[str, Any]:
             "max_mapped_genes": 300,
         },
         "output": {
-            "root_dir": "Experiment/core_code/outputs/priors/string_kegg_v1",
+            "root_dir": "outputs/priors/string_kegg_v1",
             "prefix": "string_kegg_v1",
         },
     }

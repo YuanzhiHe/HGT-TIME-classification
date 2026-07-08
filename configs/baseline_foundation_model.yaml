@@ -12,7 +12,7 @@
 experiment_id: "EXP-B05-FM"
 
 input:
-  graphs_dir: "Experiment/core_code/outputs/hetero_graph/visium_breast_regions__combined_aug/graphs"
+  graphs_dir: "outputs/hetero_graph/visium_breast_regions__combined_aug/graphs"
 
 runtime:
   batch_size: 4

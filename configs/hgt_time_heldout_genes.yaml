@@ -2,7 +2,7 @@ experiment_id: "EXP-HELDOUT-HGT"
 model_family: hgt_time
 
 input:
-  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__heldout_genes/graphs
+  graphs_dir: outputs/hetero_graph/visium_breast_regions__heldout_genes/graphs
 
 runtime:
   batch_size: 4

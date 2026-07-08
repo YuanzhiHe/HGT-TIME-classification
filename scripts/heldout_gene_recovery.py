@@ -31,7 +31,7 @@ def main(config_path, exp_id, heldout_json):
         config = yaml.safe_load(f)
     graphs_dir = PROJECT_ROOT / config["input"]["graphs_dir"]
     graphs = [torch.load(p, weights_only=False) for p in sorted(graphs_dir.glob("*.pt"))]
-    exp_dir = PROJECT_ROOT / "Experiment/core_code/outputs/results" / exp_id
+    exp_dir = PROJECT_ROOT / "outputs/results" / exp_id
     ckpts = find_checkpoints(exp_dir)
     loader = DataLoader(graphs, batch_size=4, shuffle=False)
 

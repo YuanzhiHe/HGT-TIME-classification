@@ -2,7 +2,7 @@ experiment_id: "EXP-P03-HGT-COMBINED-PROJ64"
 model_family: hgt_time
 
 input:
-  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__combined_proj64/graphs
+  graphs_dir: outputs/hetero_graph/visium_breast_regions__combined_proj64/graphs
 
 runtime:
   batch_size: 8

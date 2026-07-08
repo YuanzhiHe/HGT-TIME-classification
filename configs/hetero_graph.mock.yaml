@@ -19,7 +19,7 @@
     }
   },
   "output": {
-    "root_dir": "Experiment/core_code/outputs/hetero_graph/visium_mock__hetero_v1",
+    "root_dir": "outputs/hetero_graph/visium_mock__hetero_v1",
     "prefix": "visium_mock__hetero_v1"
   },
   "validation": {

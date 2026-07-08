@@ -65,9 +65,9 @@ def build_default_config() -> dict[str, Any]:
     return {
         "input": {
             "dataset_id": "visium_breast",
-            "scrna_manifest_path": "Experiment/core_code/outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_manifest.json",
-            "prior_manifest_path": "Experiment/core_code/outputs/priors/string_kegg_v1/string_kegg_v1__step-07_manifest.json",
-            "spatial_manifest_path": "Experiment/core_code/outputs/spatial/visium_breast__spatial_v1/visium_breast__spatial_v1__step-03_manifest.json",
+            "scrna_manifest_path": "outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_manifest.json",
+            "prior_manifest_path": "outputs/priors/string_kegg_v1/string_kegg_v1__step-07_manifest.json",
+            "spatial_manifest_path": "outputs/spatial/visium_breast__spatial_v1/visium_breast__spatial_v1__step-03_manifest.json",
             "spatial_expression_path": None,
             "spatial_expression_gene_symbol_column": "gene_symbol",
             "spatial_node_id_column": None,
@@ -186,7 +186,7 @@ def build_default_config() -> dict[str, Any]:
             "positive_strategy": "union",
         },
         "output": {
-            "root_dir": "Experiment/core_code/outputs/hetero_graph/visium_breast__hetero_v1",
+            "root_dir": "outputs/hetero_graph/visium_breast__hetero_v1",
             "prefix": "visium_breast__hetero_v1",
         },
         "validation": {
@@ -296,7 +296,7 @@ def require_h5ad() -> Any:
     if ad is None:
         raise SystemExit(
             "anndata is required for the hetero graph pipeline. "
-            "Install dependencies from Experiment/core_code/requirements-hetero.txt"
+            "Install dependencies from requirements-hetero.txt"
         )
     return ad
 
@@ -305,7 +305,7 @@ def require_pyg() -> Any:
     if HeteroData is None:
         raise SystemExit(
             "torch_geometric is required for the hetero graph pipeline. "
-            "Install dependencies from Experiment/core_code/requirements-hetero.txt"
+            "Install dependencies from requirements-hetero.txt"
         )
     return HeteroData
 

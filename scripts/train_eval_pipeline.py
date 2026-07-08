@@ -684,7 +684,7 @@ def run_experiment(config: dict[str, Any], project_root: Path, seeds: list[int] 
         )
 
     # Output directory
-    output_root = project_root / config.get("output_root", "Experiment/core_code/outputs/results")
+    output_root = project_root / config.get("output_root", "outputs/results")
     exp_dir = output_root / experiment_id
     exp_dir.mkdir(parents=True, exist_ok=True)
     checkpoint_dir = exp_dir / "checkpoints"
@@ -844,7 +844,7 @@ def run_all_from_registry(registry_path: Path, project_root: Path, seeds: list[i
         registry_config = {
             "input": {},
             "split": {},
-            "output_root": defaults.get("output_root", "Experiment/core_code/outputs/results"),
+            "output_root": defaults.get("output_root", "outputs/results"),
         }
         if defaults.get("graphs_dir") is not None:
             registry_config["input"]["graphs_dir"] = defaults["graphs_dir"]
@@ -883,7 +883,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--registry",
         type=Path,
-        default=Path("Experiment/core_code/configs/experiment_registry.yaml"),
+        default=Path("configs/experiment_registry.yaml"),
         help="Path to experiment registry YAML",
     )
     parser.add_argument(

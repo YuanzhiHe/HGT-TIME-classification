@@ -1,6 +1,6 @@
 experiment_id: EXP-FUSION-XATTN
 input:
-  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__fusion/graphs
+  graphs_dir: outputs/hetero_graph/visium_breast_regions__fusion/graphs
 loss:
   class_weights: null
   classification_weight: 1.0

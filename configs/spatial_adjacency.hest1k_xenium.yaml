@@ -55,7 +55,7 @@ graph:
     - scaled_radius
 
 output:
-  root_dir: Experiment/core_code/outputs/spatial/hest1k_xenium__spatial_v1
+  root_dir: outputs/spatial/hest1k_xenium__spatial_v1
   prefix: hest1k_xenium__spatial_v1
 
 validation:

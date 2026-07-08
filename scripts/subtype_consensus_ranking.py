@@ -124,7 +124,7 @@ def main() -> None:
         output_dir = project_root / args.output_dir
     else:
         output_root = project_root / config.get(
-            "output_root", "Experiment/core_code/outputs/results"
+            "output_root", "outputs/results"
         )
         output_dir = output_root / experiment_id / "interpretability"
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -151,7 +151,7 @@ def main() -> None:
     # Find checkpoints
     exp_result_dir = (
         project_root
-        / config.get("output_root", "Experiment/core_code/outputs/results")
+        / config.get("output_root", "outputs/results")
         / experiment_id
     )
     checkpoints = find_checkpoints(exp_result_dir)

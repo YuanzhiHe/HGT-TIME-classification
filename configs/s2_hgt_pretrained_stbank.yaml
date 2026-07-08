@@ -2,7 +2,7 @@ experiment_id: "EXP-P01-S2-PRETRAINED"
 model_family: hgt_time
 
 input:
-  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_section2_regions__pretrain_aug/graphs
+  graphs_dir: outputs/hetero_graph/visium_breast_section2_regions__pretrain_aug/graphs
 
 runtime:
   batch_size: 4

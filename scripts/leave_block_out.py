@@ -44,7 +44,7 @@ def main(config_path: str, exp_id: str):
     blocks = np.array([block_of(g) for g in gids])
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     batch_size = config.get("runtime", {}).get("batch_size", 4)
-    ckpt_dir = PROJECT_ROOT / "Experiment/core_code/outputs/results" / exp_id / "checkpoints"
+    ckpt_dir = PROJECT_ROOT / "outputs/results" / exp_id / "checkpoints"
     ckpt_dir.mkdir(parents=True, exist_ok=True)
 
     all_results = []
@@ -71,7 +71,7 @@ def main(config_path: str, exp_id: str):
         return float(np.mean(v)), float(np.std(v))
     aggd = {f"{k}_mean": agg(k)[0] for k in ["macro_auroc", "macro_f1", "balanced_accuracy"]}
     aggd.update({f"{k}_std": agg(k)[1] for k in ["macro_auroc", "macro_f1", "balanced_accuracy"]})
-    out = PROJECT_ROOT / "Experiment/core_code/outputs/results" / exp_id
+    out = PROJECT_ROOT / "outputs/results" / exp_id
     out.mkdir(parents=True, exist_ok=True)
     with (out / "results.json").open("w") as f:
         json.dump({"experiment_id": exp_id, "aggregated": aggd, "per_fold": all_results}, f, indent=2, default=str)

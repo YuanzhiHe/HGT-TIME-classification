@@ -184,7 +184,7 @@ def main() -> None:
     parser.add_argument(
         "--results-dir",
         type=Path,
-        default=Path("Experiment/core_code/outputs/results"),
+        default=Path("outputs/results"),
         help="Root directory containing per-experiment results",
     )
     parser.add_argument(

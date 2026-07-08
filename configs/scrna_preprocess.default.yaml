@@ -59,7 +59,7 @@ annotation:
     epithelial_malignant: ["EPCAM", "KRT8", "KRT18", "KRT19", "ERBB2"]
 
 output:
-  root_dir: Experiment/core_code/outputs/scrna/gse161529__reference_v1
+  root_dir: outputs/scrna/gse161529__reference_v1
   prefix: gse161529__reference_v1
   graph_feature_space: pca
   graph_feature_dims: 32

@@ -79,4 +79,4 @@ def reconstruct(config_path: str):
 
 
 if __name__ == "__main__":
-    reconstruct(sys.argv[1] if len(sys.argv) > 1 else "Experiment/core_code/configs/hetero_graph.regions.yaml")
+    reconstruct(sys.argv[1] if len(sys.argv) > 1 else "configs/hetero_graph.regions.yaml")

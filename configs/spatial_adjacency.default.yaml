@@ -56,7 +56,7 @@ graph:
     - permuted_primary
 
 output:
-  root_dir: Experiment/core_code/outputs/spatial/visium_breast__spatial_v1
+  root_dir: outputs/spatial/visium_breast__spatial_v1
   prefix: visium_breast__spatial_v1
 
 validation:

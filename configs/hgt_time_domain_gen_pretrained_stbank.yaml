@@ -3,7 +3,7 @@ experiment_id: EXP-DGP01-DG-PRETRAINED
 model_family: domain_generalized
 
 input:
-  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__pretrain_aug/graphs
+  graphs_dir: outputs/hetero_graph/visium_breast_regions__pretrain_aug/graphs
 
 model:
   hidden_dim: 128

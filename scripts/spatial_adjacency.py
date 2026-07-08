@@ -84,7 +84,7 @@ def build_default_config() -> dict[str, Any]:
             "variants_to_export": ["scaled_radius", "knn", "delaunay", "permuted_primary"],
         },
         "output": {
-            "root_dir": "Experiment/core_code/outputs/spatial/visium_breast__spatial_v1",
+            "root_dir": "outputs/spatial/visium_breast__spatial_v1",
             "prefix": "visium_breast__spatial_v1",
         },
         "validation": {
@@ -164,7 +164,7 @@ def require_anndata() -> Any:
         import anndata as ad  # type: ignore
     except ModuleNotFoundError as exc:  # pragma: no cover - handled at runtime
         raise SystemExit(
-            "anndata is required for .h5ad input. Install Experiment/core_code/requirements-spatial.txt"
+            "anndata is required for .h5ad input. Install requirements-spatial.txt"
         ) from exc
     return ad
 
@@ -515,7 +515,7 @@ def build_delaunay_edges(
     distances: np.ndarray,
 ) -> tuple[dict[tuple[int, int], float], dict[str, float]]:
     if Delaunay is None:
-        raise SystemExit("scipy is required for Delaunay adjacency. Install Experiment/core_code/requirements-spatial.txt")
+        raise SystemExit("scipy is required for Delaunay adjacency. Install requirements-spatial.txt")
 
     edge_map: dict[tuple[int, int], float] = {}
     if len(coords) < 3:

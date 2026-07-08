@@ -3,7 +3,7 @@ experiment_id: EXP-DGP03-DG-COMBINED-PROJ64
 model_family: domain_generalized
 
 input:
-  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__combined_proj64/graphs
+  graphs_dir: outputs/hetero_graph/visium_breast_regions__combined_proj64/graphs
 
 model:
   hidden_dim: 128

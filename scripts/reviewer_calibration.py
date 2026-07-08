@@ -115,7 +115,7 @@ def run_one(config_path: Path, device):
     n_folds = split_cfg.get("n_folds", 5)
     split_unit = split_cfg.get("unit", "patient_id")
     batch_size = config.get("runtime", {}).get("batch_size", 4)
-    ckpt_dir = PROJECT_ROOT / config.get("output_root", "Experiment/core_code/outputs/results") / exp_id / "checkpoints"
+    ckpt_dir = PROJECT_ROOT / config.get("output_root", "outputs/results") / exp_id / "checkpoints"
 
     graphs = prepare_graphs(config)
     groups, labels = get_split_arrays(graphs, split_unit)

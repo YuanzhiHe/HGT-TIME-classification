@@ -77,7 +77,7 @@ def build_default_config() -> dict[str, Any]:
             },
         },
         "output": {
-            "root_dir": "Experiment/core_code/outputs/scrna/gse161529__reference_v1",
+            "root_dir": "outputs/scrna/gse161529__reference_v1",
             "prefix": "gse161529__reference_v1",
             "graph_feature_space": "pca",
             "graph_feature_dims": 32,
@@ -106,7 +106,7 @@ def require_scanpy() -> tuple[Any, Any]:
     except ModuleNotFoundError as exc:
         raise SystemExit(
             "scanpy is required to run this pipeline. "
-            "Install dependencies from Experiment/core_code/requirements-scrna.txt"
+            "Install dependencies from requirements-scrna.txt"
         ) from exc
     return sc, sce
 

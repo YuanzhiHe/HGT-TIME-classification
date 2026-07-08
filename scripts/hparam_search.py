@@ -23,7 +23,7 @@ Usage:
         --config configs/hgt_time.default.yaml \
         --search-config configs/hyperparameter_search_strategy.yaml \
         --study-name hgt_time_search \
-        --storage sqlite:///Experiment/core_code/outputs/results/optuna.db
+        --storage sqlite:///outputs/results/optuna.db
 """
 from __future__ import annotations
 
@@ -468,7 +468,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--search-config",
         type=Path,
-        default=Path("Experiment/core_code/configs/hyperparameter_search_strategy.yaml"),
+        default=Path("configs/hyperparameter_search_strategy.yaml"),
         help="Search space config YAML",
     )
     parser.add_argument("--n-trials", type=int, default=None, help="Number of trials (overrides search config)")

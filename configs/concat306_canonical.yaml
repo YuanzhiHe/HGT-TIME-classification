@@ -1,6 +1,6 @@
 experiment_id: EXP-CONCAT306-CAN
 input:
-  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__combined_aug/graphs
+  graphs_dir: outputs/hetero_graph/visium_breast_regions__combined_aug/graphs
 loss:
   class_weights: null
   classification_weight: 1.0

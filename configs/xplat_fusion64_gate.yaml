@@ -1,6 +1,6 @@
 experiment_id: EXP-XPLAT-FUSION64-GATE
 input:
-  graphs_dir: Experiment/core_code/outputs/hetero_graph/hest1k_visium__fusion64/graphs
+  graphs_dir: outputs/hetero_graph/hest1k_visium__fusion64/graphs
 loss:
   class_weights: null
   classification_weight: 1.0

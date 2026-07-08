@@ -129,7 +129,7 @@ def phase2_hparam_search(
     logger.info("=" * 60)
 
     if model_configs is None:
-        model_configs = ["Experiment/core_code/configs/hgt_time.default.yaml"]
+        model_configs = ["configs/hgt_time.default.yaml"]
 
     results: dict[str, Any] = {"phase": 2, "searches": {}}
 

@@ -2,7 +2,7 @@ experiment_id: "EXP-STRING-S900"
 model_family: hgt_time
 
 input:
-  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__s900/graphs
+  graphs_dir: outputs/hetero_graph/visium_breast_regions__s900/graphs
 
 runtime:
   batch_size: 4

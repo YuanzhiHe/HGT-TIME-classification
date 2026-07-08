@@ -2,8 +2,8 @@
 # Total: ~2.42M image-expression pairs
 
 data:
-  stbank_dir: "Experiment/core_code/data/stbank"
-  hest1k_dir: "Experiment/core_code/data/hest1k_breast"
+  stbank_dir: "data/stbank"
+  hest1k_dir: "data/hest1k_breast"
   n_genes: 2000
 
 model:
@@ -27,4 +27,4 @@ max_steps: 8000
 save_every_steps: 2000
 save_every: 1
 
-output_dir: "Experiment/core_code/outputs/pretrain/combined"
+output_dir: "outputs/pretrain/combined"

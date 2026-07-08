@@ -63,10 +63,10 @@ PROJECT_ROOT = THIS.parents[3]
 
 GRAPHS_DIR = (
     PROJECT_ROOT
-    / "Experiment/core_code/outputs/hetero_graph"
+    / "outputs/hetero_graph"
     / "visium_breast_regions__hetero_v1/graphs"
 )
-OUT_DIR = PROJECT_ROOT / "Experiment/core_code/outputs/results/EXP-B09-SIGNATURE"
+OUT_DIR = PROJECT_ROOT / "outputs/results/EXP-B09-SIGNATURE"
 
 EXPERIMENT_ID = "EXP-B09-SIGNATURE"
 NUM_CLASSES = 3

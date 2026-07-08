@@ -42,7 +42,7 @@ def require_anndata() -> Any:
     if ad is None:
         raise SystemExit(
             "anndata is required for Visium preprocessing. "
-            "Install dependencies from Experiment/core_code/requirements-hetero.txt"
+            "Install dependencies from requirements-hetero.txt"
         )
     return ad
 

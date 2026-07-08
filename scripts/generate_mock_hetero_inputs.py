@@ -46,7 +46,7 @@ def require_h5ad() -> Any:
     if ad is None:
         raise SystemExit(
             "anndata is required for the mock generator. "
-            "Install dependencies from Experiment/core_code/requirements-hetero.txt"
+            "Install dependencies from requirements-hetero.txt"
         )
     return ad
 
@@ -129,7 +129,7 @@ def build_spatial_expression(obs: pd.DataFrame) -> np.ndarray:
 
 def build_scrna_reference(project_root: Path) -> Path:
     ad_module = require_h5ad()
-    output_dir = project_root / "Experiment/core_code/outputs/mock_scrna/gse161529_mock__reference_v1"
+    output_dir = project_root / "outputs/mock_scrna/gse161529_mock__reference_v1"
     output_dir.mkdir(parents=True, exist_ok=True)
     obs = pd.DataFrame(
         {
@@ -171,7 +171,7 @@ def build_scrna_reference(project_root: Path) -> Path:
 
 
 def build_priors(project_root: Path) -> Path:
-    output_dir = project_root / "Experiment/core_code/outputs/mock_priors/string_kegg_mock_v1"
+    output_dir = project_root / "outputs/mock_priors/string_kegg_mock_v1"
     output_dir.mkdir(parents=True, exist_ok=True)
     gene_master = pd.DataFrame(
         {
@@ -279,7 +279,7 @@ def build_spatial(project_root: Path) -> Path:
     spatial_input_path = spatial_input_dir / "input.h5ad"
     adata.write_h5ad(spatial_input_path)
 
-    output_dir = project_root / "Experiment/core_code/outputs/mock_spatial/visium_mock__spatial_v1"
+    output_dir = project_root / "outputs/mock_spatial/visium_mock__spatial_v1"
     output_dir.mkdir(parents=True, exist_ok=True)
     nodes = obs.copy()
     nodes["graph_id"] = nodes["patient_id"] + "__" + nodes["sample_id"] + "__" + nodes["slide_id"]
@@ -339,7 +339,7 @@ def main() -> None:
     scrna_manifest = build_scrna_reference(project_root)
     prior_manifest = build_priors(project_root)
     spatial_manifest = build_spatial(project_root)
-    config_path = project_root / "Experiment/core_code/configs/hetero_graph.mock.yaml"
+    config_path = project_root / "configs/hetero_graph.mock.yaml"
     payload = {
         "input": {
             "dataset_id": "visium_mock",
@@ -361,7 +361,7 @@ def main() -> None:
             },
         },
         "output": {
-            "root_dir": "Experiment/core_code/outputs/hetero_graph/visium_mock__hetero_v1",
+            "root_dir": "outputs/hetero_graph/visium_mock__hetero_v1",
             "prefix": "visium_mock__hetero_v1",
         },
     }
