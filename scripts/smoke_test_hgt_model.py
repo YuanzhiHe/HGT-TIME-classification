@@ -134,7 +134,7 @@ def main() -> None:
         user_config = yaml.safe_load(handle) or {}
     config = deep_update(copy.deepcopy(build_default_config()), user_config)
 
-    core_code_root = ensure_descendant(project_root / "Experiment/core_code", project_root)
+    core_code_root = ensure_descendant(project_root / "core_code", project_root)
     sys.path.insert(0, str(core_code_root))
     from models import HGTTimeLoss, HGTTimeModel, collect_topk_rankings
 

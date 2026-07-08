@@ -25,7 +25,7 @@ def build_default_config() -> dict[str, Any]:
     return {
         "dataset": {
             "dataset_id": "visium_breast",
-            "input_path": "Experiment/datasets/spatial/processed/input.h5ad",
+            "input_path": "datasets/spatial/processed/input.h5ad",
             "input_format": "auto",
             "node_id_column": None,
             "patient_id_column": "patient_id",

@@ -274,7 +274,7 @@ def build_spatial(project_root: Path) -> Path:
     obs = build_spatial_obs(graph_specs)
     matrix = build_spatial_expression(obs)
     adata = ad_module.AnnData(X=matrix, obs=obs.set_index("node_id"), var=pd.DataFrame({"gene_symbol": GENES}, index=GENES))
-    spatial_input_dir = project_root / "Experiment/datasets/mock_spatial/processed"
+    spatial_input_dir = project_root / "datasets/mock_spatial/processed"
     spatial_input_dir.mkdir(parents=True, exist_ok=True)
     spatial_input_path = spatial_input_dir / "input.h5ad"
     adata.write_h5ad(spatial_input_path)

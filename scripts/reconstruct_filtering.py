@@ -69,7 +69,7 @@ def reconstruct(config_path: str):
     if "spot_label_nunique" in gmf.columns:
         amb = gmf.loc[gmf["spot_label_nunique"] > 1]
         print(f"\nRegions with >1 spot-label class (ambiguous): {len(amb)}")
-    out = PROJECT_ROOT / "Experiment/analysis/filtering_breakdown_candidate_table.tsv"
+    out = PROJECT_ROOT / "analysis/filtering_breakdown_candidate_table.tsv"
     keep_cols = [c for c in ["time_label", "is_uncertain", "spot_label_nunique",
                              "any_spot_uncertain", "n_spots",
                              "infiltration_score", "penetration_score",

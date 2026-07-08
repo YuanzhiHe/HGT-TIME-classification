@@ -1,6 +1,6 @@
 dataset:
   dataset_id: hest1k_xenium_breast
-  input_path: Experiment/datasets/spatial/processed/hest1k_xenium/hest1k_xenium_merged.h5ad
+  input_path: datasets/spatial/processed/hest1k_xenium/hest1k_xenium_merged.h5ad
   input_format: auto
   node_id_column: null
   patient_id_column: patient_id

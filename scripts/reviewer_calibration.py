@@ -39,7 +39,7 @@ from sklearn.metrics import (
 )
 
 THIS = Path(__file__).resolve()
-CORE = THIS.parents[1]  # Experiment/core_code
+CORE = THIS.parents[1]  # core_code
 PROJECT_ROOT = THIS.parents[3]
 sys.path.insert(0, str(CORE))
 sys.path.insert(0, str(CORE / "scripts"))

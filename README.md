@@ -178,12 +178,44 @@ python scripts/hparam_search.py --config configs/hgt_time.default.yaml --n-trial
 python scripts/run_full_pipeline.py --phases 1 2 3 --config configs/full_pipeline.yaml
 ```
 
-## Data sources
+## Data download
 
-All datasets used are public: breast, colorectal, and lung spatial transcriptomics from HEST-1k;
-the breast single-cell reference from GEO (GSE161529); protein-interaction, pathway, and
-regulatory priors from STRING, KEGG, and TRRUST. Place them under `datasets/` and `data/` as
-described above.
+All datasets are public. Download them into `datasets/` (raw and processed inputs) and `data/`
+(auxiliary assets); the paths above are the defaults the configs expect.
+
+### Spatial transcriptomics (HEST-1k)
+
+Breast, colorectal, and lung Visium and Xenium sections come from HEST-1k
+(https://huggingface.co/datasets/MahmoodLab/hest). The helper script pulls sections by organ or
+by identifier through `huggingface_hub`.
+
+```bash
+# a specific organ, cancer sections only
+python scripts/pretraining/download_hest1k.py --out-dir datasets/hest1k --organ Breast --cancer-only
+
+# specific sections by identifier
+python scripts/pretraining/download_hest1k.py --out-dir datasets/hest1k --ids TENX95 TENX96
+
+# run with --help for all options (--all, --organ, --ids, --cancer-only)
+python scripts/pretraining/download_hest1k.py --help
+```
+
+### Single-cell reference (GSE161529)
+
+The breast single-cell reference is GEO accession GSE161529. Download it from GEO, convert to an
+AnnData `.h5ad`, and place it at `datasets/gse161529/processed/input.h5ad` (the path in
+`configs/scrna_preprocess.default.yaml`).
+
+### Knowledge priors (STRING, KEGG, TRRUST)
+
+`scripts/build_prior_resources.py` assembles gene-gene, pathway, and regulatory edges. KEGG is
+fetched from its REST API at run time. STRING v12.0 human files
+(`9606.protein.links`, `.aliases`, `.info`) are downloaded from
+https://version-12-0.string-db.org/cgi/download into `datasets/string_v12/raw/`, and the TRRUST
+human table from https://www.grnpedia.org/trrust into `datasets/trrust/raw/`. The exact expected
+filenames are listed at the top of `scripts/build_prior_resources.py`.
+
+For pretraining data (ST-bank), see `scripts/pretraining/download_stbank.py`.
 
 ## License
 

@@ -1,6 +1,6 @@
 dataset:
   dataset_id: hest1k_visium_breast
-  input_path: Experiment/datasets/spatial/processed/hest1k_visium/hest1k_visium_merged.h5ad
+  input_path: datasets/spatial/processed/hest1k_visium/hest1k_visium_merged.h5ad
   input_format: auto
   node_id_column: null
   patient_id_column: patient_id

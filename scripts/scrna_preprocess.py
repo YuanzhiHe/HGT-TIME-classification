@@ -16,7 +16,7 @@ def build_default_config() -> dict[str, Any]:
     return {
         "dataset": {
             "dataset_id": "gse161529",
-            "input_path": "Experiment/datasets/gse161529/processed/input.h5ad",
+            "input_path": "datasets/gse161529/processed/input.h5ad",
             "input_format": "auto",
             "species": "human",
             "gene_symbol_column": None,

@@ -5,7 +5,7 @@ kegg:
   - Pathways in cancer
   - MicroRNAs in cancer
   fetch_live_if_missing: false
-  gene_catalog_path: Experiment/datasets/kegg_hsa/raw/list_hsa.tsv
+  gene_catalog_path: datasets/kegg_hsa/raw/list_hsa.tsv
   include_top_level_classes:
   - Cellular Processes
   - Environmental Information Processing
@@ -14,9 +14,9 @@ kegg:
   - Organismal Systems
   max_mapped_genes: 300
   min_mapped_genes: 5
-  pathway_catalog_path: Experiment/datasets/kegg_hsa/raw/pathway_catalog_hsa.tsv
-  pathway_links_path: Experiment/datasets/kegg_hsa/raw/link_pathway_hsa.tsv
-  pathway_list_path: Experiment/datasets/kegg_hsa/raw/pathway_list_hsa.tsv
+  pathway_catalog_path: datasets/kegg_hsa/raw/pathway_catalog_hsa.tsv
+  pathway_links_path: datasets/kegg_hsa/raw/link_pathway_hsa.tsv
+  pathway_list_path: datasets/kegg_hsa/raw/pathway_list_hsa.tsv
 mapping:
   allow_alias_fallback: true
   ensembl_gene_column: gene_id
@@ -37,8 +37,8 @@ prior:
   gene_pathway_weight_rule: 1 / sqrt(mapped_gene_count)
   species_taxon_id: '9606'
 string:
-  aliases_path: Experiment/datasets/string_v12/raw/9606.protein.aliases.v12.0.txt.gz
+  aliases_path: datasets/string_v12/raw/9606.protein.aliases.v12.0.txt.gz
   download_page: https://version-12-0.string-db.org/cgi/download
-  info_path: Experiment/datasets/string_v12/raw/9606.protein.info.v12.0.txt.gz
-  links_path: Experiment/datasets/string_v12/raw/9606.protein.links.v12.0.txt.gz
+  info_path: datasets/string_v12/raw/9606.protein.info.v12.0.txt.gz
+  links_path: datasets/string_v12/raw/9606.protein.links.v12.0.txt.gz
   version: '12.0'

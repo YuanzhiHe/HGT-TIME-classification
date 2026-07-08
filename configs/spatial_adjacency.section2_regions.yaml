@@ -1,6 +1,6 @@
 dataset:
   dataset_id: visium_breast_section2_regions
-  input_path: Experiment/datasets/spatial/section2_processed/input.h5ad
+  input_path: datasets/spatial/section2_processed/input.h5ad
   input_format: auto
   node_id_column: null
   patient_id_column: patient_id
