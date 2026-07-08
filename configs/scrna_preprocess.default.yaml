@@ -1,6 +1,6 @@
 dataset:
   dataset_id: gse161529
-  input_path: datasets/gse161529/processed/input.h5ad
+  input_path: Experiment/datasets/gse161529/processed/input.h5ad
   input_format: auto
   species: human
   gene_symbol_column: gene_symbol
@@ -59,7 +59,7 @@ annotation:
     epithelial_malignant: ["EPCAM", "KRT8", "KRT18", "KRT19", "ERBB2"]
 
 output:
-  root_dir: outputs/scrna/gse161529__reference_v1
+  root_dir: Experiment/core_code/outputs/scrna/gse161529__reference_v1
   prefix: gse161529__reference_v1
   graph_feature_space: pca
   graph_feature_dims: 32

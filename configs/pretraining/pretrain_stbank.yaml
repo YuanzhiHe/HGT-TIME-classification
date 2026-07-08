@@ -2,7 +2,7 @@
 # ~2.18M image-transcriptomics pairs, 32 organs, 113 studies
 
 data:
-  stbank_dir: "data/stbank"
+  stbank_dir: "Experiment/core_code/data/stbank"
   hest1k_dir: null
   n_genes: 2000
 
@@ -24,4 +24,4 @@ min_lr: 1.0e-6
 num_workers: 4
 img_size: 224
 save_every: 2
-output_dir: "outputs/pretrain/stbank"
+output_dir: "Experiment/core_code/outputs/pretrain/stbank"

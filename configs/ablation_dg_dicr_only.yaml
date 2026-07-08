@@ -5,7 +5,7 @@ experiment_id: EXP-DG-DICR-ONLY
 model_family: domain_generalized
 
 input:
-  graphs_dir: outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs
+  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs
 
 model:
   hidden_dim: 128

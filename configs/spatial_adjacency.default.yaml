@@ -1,6 +1,6 @@
 dataset:
   dataset_id: visium_breast
-  input_path: datasets/spatial/processed/input.h5ad
+  input_path: Experiment/datasets/spatial/processed/input.h5ad
   input_format: auto
   node_id_column: null
   patient_id_column: patient_id
@@ -56,7 +56,7 @@ graph:
     - permuted_primary
 
 output:
-  root_dir: outputs/spatial/visium_breast__spatial_v1
+  root_dir: Experiment/core_code/outputs/spatial/visium_breast__spatial_v1
   prefix: visium_breast__spatial_v1
 
 validation:

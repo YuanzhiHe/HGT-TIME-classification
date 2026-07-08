@@ -43,9 +43,9 @@ def discover_project_root(start: Path) -> Path:
     if current.is_file():
         current = current.parent
     for candidate in [current, *current.parents]:
-        if (candidate / "configs").is_dir() and (candidate / "scripts").is_dir() and (candidate / "models").is_dir():
+        if (candidate / "instance.json").exists():
             return candidate
-    raise SystemExit("Could not locate project root via repository structure")
+    raise SystemExit("Could not locate project root via instance.json")
 
 
 def run_cmd(cmd: list[str], label: str, log_dir: Path) -> int:
@@ -129,7 +129,7 @@ def phase2_hparam_search(
     logger.info("=" * 60)
 
     if model_configs is None:
-        model_configs = ["configs/hgt_time.default.yaml"]
+        model_configs = ["Experiment/core_code/configs/hgt_time.default.yaml"]
 
     results: dict[str, Any] = {"phase": 2, "searches": {}}
 

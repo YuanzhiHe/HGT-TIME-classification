@@ -57,10 +57,10 @@ def phase1_pretrain(config: dict[str, Any], project_root: Path) -> Path | None:
     """
     pretrain_cfg = config.get("phase1_pretrain", {})
     pretrain_config_path = project_root / pretrain_cfg.get(
-        "config", "configs/pretraining/pretrain_combined.yaml"
+        "config", "Experiment/core_code/configs/pretraining/pretrain_combined.yaml"
     )
     output_dir = project_root / pretrain_cfg.get(
-        "output_dir", "outputs/pretrain"
+        "output_dir", "Experiment/core_code/outputs/pretrain"
     )
 
     cmd = [
@@ -100,11 +100,11 @@ def phase1_inject_features(
     """
     inject_cfg = config.get("phase1_inject", {})
     graphs_dir = project_root / inject_cfg.get(
-        "graphs_dir", "outputs/hetero_graph/visium_breast__hetero_v1/graphs"
+        "graphs_dir", "Experiment/core_code/outputs/hetero_graph/visium_breast__hetero_v1/graphs"
     )
     patches_dir = project_root / inject_cfg.get("patches_dir", "data/visium_patches")
     output_dir = project_root / inject_cfg.get(
-        "output_dir", "outputs/hetero_graph/visium_breast__pretrain_aug/graphs"
+        "output_dir", "Experiment/core_code/outputs/hetero_graph/visium_breast__pretrain_aug/graphs"
     )
     mode = inject_cfg.get("mode", "concat")
 
@@ -135,7 +135,7 @@ def phase2_finetune(
     """
     finetune_cfg = config.get("phase2_finetune", {})
     finetune_config_path = project_root / finetune_cfg.get(
-        "config", "configs/hgt_time.default.yaml"
+        "config", "Experiment/core_code/configs/hgt_time.default.yaml"
     )
 
     # If augmented graphs are available, override the input path
@@ -164,7 +164,7 @@ def phase2_finetune(
         return None
 
     exp_id = ft_config.get("experiment_id", "EXP-UNKNOWN")
-    output_root = project_root / ft_config.get("output_root", "outputs/results")
+    output_root = project_root / ft_config.get("output_root", "Experiment/core_code/outputs/results")
     return output_root / exp_id
 
 
@@ -179,7 +179,7 @@ def phase3_domain_gen(
     """
     dg_cfg = config.get("phase3_domain_gen", {})
     dg_config_path = project_root / dg_cfg.get(
-        "config", "configs/hgt_time_domain_gen.yaml"
+        "config", "Experiment/core_code/configs/hgt_time_domain_gen.yaml"
     )
 
     with open(dg_config_path) as f:
@@ -206,7 +206,7 @@ def phase3_domain_gen(
         return None
 
     exp_id = dg_config.get("experiment_id", "EXP-DG01-DOMAIN-GEN")
-    output_root = project_root / dg_config.get("output_root", "outputs/results")
+    output_root = project_root / dg_config.get("output_root", "Experiment/core_code/outputs/results")
     return output_root / exp_id
 
 
@@ -225,17 +225,17 @@ def phase3_ood_eval(
     cs_cfg = ood_cfg.get("cross_section", {})
     if cs_cfg.get("enabled", True):
         train_graphs = project_root / cs_cfg.get(
-            "train_graphs", "outputs/hetero_graph/visium_breast__hetero_v1/graphs"
+            "train_graphs", "Experiment/core_code/outputs/hetero_graph/visium_breast__hetero_v1/graphs"
         )
         test_graphs = project_root / cs_cfg.get(
-            "test_graphs", "outputs/hetero_graph/section2__hetero_v1/graphs"
+            "test_graphs", "Experiment/core_code/outputs/hetero_graph/section2__hetero_v1/graphs"
         )
         ckpt_dir = checkpoints_dir or (project_root / cs_cfg.get("checkpoints", ""))
         model_config = project_root / cs_cfg.get(
-            "config", "configs/hgt_time_domain_gen.yaml"
+            "config", "Experiment/core_code/configs/hgt_time_domain_gen.yaml"
         )
         output_path = project_root / cs_cfg.get(
-            "output", "outputs/results/ood_cross_section.json"
+            "output", "Experiment/core_code/outputs/results/ood_cross_section.json"
         )
 
         cmd = [
@@ -258,10 +258,10 @@ def phase3_ood_eval(
     if lopo_cfg.get("enabled", False):
         graphs_dir = project_root / lopo_cfg.get("graphs_dir", "")
         model_config = project_root / lopo_cfg.get(
-            "config", "configs/hgt_time_domain_gen.yaml"
+            "config", "Experiment/core_code/configs/hgt_time_domain_gen.yaml"
         )
         output_path = project_root / lopo_cfg.get(
-            "output", "outputs/results/ood_lopo.json"
+            "output", "Experiment/core_code/outputs/results/ood_lopo.json"
         )
 
         cmd = [
@@ -300,8 +300,9 @@ def main():
         config = yaml.safe_load(f)
 
     project_root = Path(args.config).parent
+    # Walk up to find instance.json
     for candidate in [project_root, *project_root.parents]:
-        if (candidate / "configs").is_dir() and (candidate / "scripts").is_dir() and (candidate / "models").is_dir():
+        if (candidate / "instance.json").exists():
             project_root = candidate
             break
 

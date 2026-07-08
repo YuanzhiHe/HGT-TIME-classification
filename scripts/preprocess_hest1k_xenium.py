@@ -8,7 +8,7 @@ Usage:
     python preprocess_hest1k_xenium.py \
         --hest-dir data/hest1k_breast/st \
         --metadata data/hest1k_breast/metadata.csv \
-        --output-dir datasets/spatial/processed/hest1k_xenium \
+        --output-dir Experiment/datasets/spatial/processed/hest1k_xenium \
         --sample-ids TENX99 TENX98 TENX97 TENX96 TENX95 TENX94 NCBI785 NCBI784 NCBI783
 """
 from __future__ import annotations

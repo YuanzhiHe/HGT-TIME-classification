@@ -1,0 +1,39 @@
+features:
+  cell_type_column: cell_type
+  compartment_column: compartment
+  immune_probability_column: immune_probability
+  tumor_probability_column: tumor_probability
+input:
+  assume_log1p_input: false
+  dataset_id: visium_breast_regions
+  prior_manifest_path: Experiment/core_code/outputs/priors/string_kegg_v1/string_kegg_v1__step-07_manifest.json
+  scrna_manifest_path: Experiment/core_code/outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_manifest.json
+  spatial_expression_gene_symbol_column: gene_symbol
+  spatial_expression_path: null
+  spatial_manifest_path: Experiment/core_code/outputs/spatial/visium_breast_regions__spatial_v1/visium_breast_regions__spatial_v1__step-03_manifest.json
+  spatial_node_id_column: null
+labels:
+  graph_label_mode: aggregate_rule
+  is_uncertain_column: is_uncertain
+  phenotype_columns:
+    activation_score: activation_score
+    infiltration_score: infiltration_score
+    penetration_score: penetration_score
+    retention_score: retention_score
+  time_label_column: time_label
+  uncertainty_margin_robust_sd: 0.25
+output:
+  prefix: visium_breast_regions__m025
+  root_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__m025
+runtime:
+  max_graphs: null
+schema:
+  cell_gene_top_k_per_cell: 64
+  cell_pca_dims: 32
+  max_gene_nodes_per_graph: 2048
+  max_pathway_nodes_per_graph: 256
+  min_genes_per_pathway_in_graph: 3
+validation:
+  fail_below_min: false
+  min_bags: 1
+  min_graphs: 30

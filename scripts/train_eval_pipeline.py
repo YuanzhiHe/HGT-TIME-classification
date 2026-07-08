@@ -53,9 +53,9 @@ def discover_project_root(start: Path) -> Path:
     if current.is_file():
         current = current.parent
     for candidate in [current, *current.parents]:
-        if (candidate / "configs").is_dir() and (candidate / "scripts").is_dir() and (candidate / "models").is_dir():
+        if (candidate / "instance.json").exists():
             return candidate
-    raise SystemExit("Could not locate project root via repository structure")
+    raise SystemExit("Could not locate project root via instance.json")
 
 
 def set_seed(seed: int) -> None:
@@ -262,6 +262,20 @@ def build_model(
                 dicr_temperature=dg_cfg.get("dicr_temperature", 0.1),
             )
         return base_model
+    elif model_family == "fusion_hgt":
+        from models.fusion_hgt_model import FusionHGTTimeModel
+        input_dims = {nt: int(sample_graph[nt].x.size(-1)) for nt in sample_graph.node_types}
+        fusion_keys = {
+            "hidden_dim", "num_layers", "num_heads", "dropout", "num_classes",
+            "pheno_dim", "use_pheno_head", "use_cell_state_head", "cell_state_dim",
+            "use_ranking_heads", "pretrain_dim", "morph_dim", "fusion_mode",
+        }
+        filtered = {k: v for k, v in model_kwargs.items() if k in fusion_keys}
+        return FusionHGTTimeModel(
+            metadata=sample_graph.metadata(),
+            input_dims=input_dims,
+            **filtered,
+        )
     else:
         raise ValueError(f"Unknown model_family: {model_family}")
 
@@ -322,7 +336,7 @@ def train_one_fold(
 
     # Loss function setup
     hgt_loss_fn = None
-    if model_family == "hgt_time":
+    if model_family in ("hgt_time", "fusion_hgt"):
         hgt_loss_fn = HGTTimeLoss(
             classification_weight=loss_cfg.get("classification_weight", 1.0),
             phenotype_weight=loss_cfg.get("phenotype_weight", 0.0),
@@ -335,7 +349,7 @@ def train_one_fold(
     label_smoothing = loss_cfg.get("label_smoothing", 0.0)
     class_weights = loss_cfg.get("class_weights")
     ce_weight = None
-    if class_weights and model_family != "hgt_time":
+    if class_weights and model_family not in ("hgt_time", "fusion_hgt"):
         ce_weight = torch.tensor(class_weights, dtype=torch.float32, device=device)
 
     best_val_auroc = -1.0
@@ -383,7 +397,7 @@ def train_one_fold(
                 outputs = model(batch)
             logits = outputs["graph_logits"]
 
-            if model_family in ("hgt_time", "domain_generalized") and hgt_loss_fn is not None:
+            if model_family in ("hgt_time", "domain_generalized", "fusion_hgt") and hgt_loss_fn is not None:
                 loss_dict = hgt_loss_fn(outputs, batch)
                 loss = loss_dict["loss"]
                 # Add domain generalization losses
@@ -503,7 +517,7 @@ def evaluate_model(
     num_classes = config.get("model", {}).get("num_classes", 3)
 
     hgt_loss_fn = None
-    if model_family in ("hgt_time", "domain_generalized"):
+    if model_family in ("hgt_time", "domain_generalized", "fusion_hgt"):
         hgt_loss_fn = HGTTimeLoss(
             classification_weight=loss_cfg.get("classification_weight", 1.0),
             phenotype_weight=loss_cfg.get("phenotype_weight", 0.0),
@@ -516,7 +530,7 @@ def evaluate_model(
     label_smoothing = loss_cfg.get("label_smoothing", 0.0)
     class_weights = loss_cfg.get("class_weights")
     ce_weight = None
-    if class_weights and model_family not in ("hgt_time", "domain_generalized"):
+    if class_weights and model_family not in ("hgt_time", "domain_generalized", "fusion_hgt"):
         ce_weight = torch.tensor(class_weights, dtype=torch.float32, device=device)
 
     is_domain_gen = model_family == "domain_generalized"
@@ -541,7 +555,7 @@ def evaluate_model(
 
             y = _get_labels(batch, logits.size(0), device)
 
-            if model_family in ("hgt_time", "domain_generalized") and hgt_loss_fn is not None:
+            if model_family in ("hgt_time", "domain_generalized", "fusion_hgt") and hgt_loss_fn is not None:
                 loss_dict = hgt_loss_fn(outputs, batch)
                 loss = loss_dict["loss"]
             else:
@@ -670,7 +684,7 @@ def run_experiment(config: dict[str, Any], project_root: Path, seeds: list[int] 
         )
 
     # Output directory
-    output_root = project_root / config.get("output_root", "outputs/results")
+    output_root = project_root / config.get("output_root", "Experiment/core_code/outputs/results")
     exp_dir = output_root / experiment_id
     exp_dir.mkdir(parents=True, exist_ok=True)
     checkpoint_dir = exp_dir / "checkpoints"
@@ -830,7 +844,7 @@ def run_all_from_registry(registry_path: Path, project_root: Path, seeds: list[i
         registry_config = {
             "input": {},
             "split": {},
-            "output_root": defaults.get("output_root", "outputs/results"),
+            "output_root": defaults.get("output_root", "Experiment/core_code/outputs/results"),
         }
         if defaults.get("graphs_dir") is not None:
             registry_config["input"]["graphs_dir"] = defaults["graphs_dir"]
@@ -869,7 +883,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--registry",
         type=Path,
-        default=Path("configs/experiment_registry.yaml"),
+        default=Path("Experiment/core_code/configs/experiment_registry.yaml"),
         help="Path to experiment registry YAML",
     )
     parser.add_argument(

@@ -19,7 +19,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--config",
         type=Path,
-        default=Path("configs/hgt_time.mock.yaml"),
+        default=Path("Experiment/core_code/configs/hgt_time.mock.yaml"),
         help="Path to the HGT model YAML config",
     )
     return parser.parse_args()
@@ -37,7 +37,7 @@ def deep_update(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any
 def build_default_config() -> dict[str, Any]:
     return {
         "input": {
-            "graphs_dir": "outputs/hetero_graph/visium_mock__hetero_v1/graphs",
+            "graphs_dir": "Experiment/core_code/outputs/hetero_graph/visium_mock__hetero_v1/graphs",
         },
         "runtime": {
             "batch_size": 2,
@@ -79,9 +79,9 @@ def discover_project_root(start: Path) -> Path:
     if current.is_file():
         current = current.parent
     for candidate in [current, *current.parents]:
-        if (candidate / "configs").is_dir() and (candidate / "scripts").is_dir() and (candidate / "models").is_dir():
+        if (candidate / "instance.json").exists():
             return candidate
-    raise SystemExit("Could not locate project root via repository structure")
+    raise SystemExit("Could not locate project root via instance.json")
 
 
 def resolve_path(project_root: Path, value: str) -> Path:
@@ -134,7 +134,8 @@ def main() -> None:
         user_config = yaml.safe_load(handle) or {}
     config = deep_update(copy.deepcopy(build_default_config()), user_config)
 
-    sys.path.insert(0, str(project_root))
+    core_code_root = ensure_descendant(project_root / "Experiment/core_code", project_root)
+    sys.path.insert(0, str(core_code_root))
     from models import HGTTimeLoss, HGTTimeModel, collect_topk_rankings
 
     random.seed(0)

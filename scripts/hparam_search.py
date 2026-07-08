@@ -23,7 +23,7 @@ Usage:
         --config configs/hgt_time.default.yaml \
         --search-config configs/hyperparameter_search_strategy.yaml \
         --study-name hgt_time_search \
-        --storage sqlite:///outputs/results/optuna.db
+        --storage sqlite:///Experiment/core_code/outputs/results/optuna.db
 """
 from __future__ import annotations
 
@@ -47,9 +47,9 @@ def discover_project_root(start: Path) -> Path:
     if current.is_file():
         current = current.parent
     for candidate in [current, *current.parents]:
-        if (candidate / "configs").is_dir() and (candidate / "scripts").is_dir() and (candidate / "models").is_dir():
+        if (candidate / "instance.json").exists():
             return candidate
-    raise SystemExit("Could not locate project root via repository structure")
+    raise SystemExit("Could not locate project root via instance.json")
 
 
 def sample_params(trial: Any, space: dict[str, Any], prefix: str = "") -> dict[str, Any]:
@@ -468,7 +468,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--search-config",
         type=Path,
-        default=Path("configs/hyperparameter_search_strategy.yaml"),
+        default=Path("Experiment/core_code/configs/hyperparameter_search_strategy.yaml"),
         help="Search space config YAML",
     )
     parser.add_argument("--n-trials", type=int, default=None, help="Number of trials (overrides search config)")

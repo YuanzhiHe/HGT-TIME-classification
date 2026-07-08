@@ -10,7 +10,7 @@ experiment_id: "EXP-A05-HOMO"
 model_family: homogeneous_graph
 
 input:
-  graphs_dir: outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs
+  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs
 
 ablation:
   hypothesis: "H2"

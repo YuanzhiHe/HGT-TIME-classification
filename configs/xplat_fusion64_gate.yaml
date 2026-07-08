@@ -1,0 +1,51 @@
+experiment_id: EXP-XPLAT-FUSION64-GATE
+input:
+  graphs_dir: Experiment/core_code/outputs/hetero_graph/hest1k_visium__fusion64/graphs
+loss:
+  class_weights: null
+  classification_weight: 1.0
+  huber_delta: 1.0
+  label_smoothing: 0.05
+  max_ranking_pairs_per_graph: 256
+  phenotype_weight: 0.3
+  ranking_weight: 0.1
+  region_weight: 0.0
+model:
+  cell_state_dim: 4
+  dropout: 0.2
+  fusion_mode: gate
+  hidden_dim: 128
+  num_classes: 2
+  num_heads: 4
+  num_layers: 3
+  pheno_dim: 4
+  pretrain_dim: 64
+  use_cell_state_head: false
+  use_pheno_head: true
+  use_ranking_heads: true
+model_family: fusion_hgt
+runtime:
+  batch_size: 4
+  epochs: 100
+  eval_every: 1
+  inject_mock_targets: false
+  learning_rate: 1e-3
+  num_workers: 4
+  patience: 15
+  scheduler: cosine
+  scheduler_kwargs:
+    T_max: 100
+  seed: 42
+  shuffle: true
+  topk: 10
+  weight_decay: 1e-5
+split:
+  inner_folds: 3
+  keep_classes:
+  - 0
+  - 2
+  n_folds: 5
+  unit: patient_id
+targets:
+  gene_positive_ids: []
+  pathway_positive_ids: []

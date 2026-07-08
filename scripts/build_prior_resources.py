@@ -28,25 +28,25 @@ def build_default_config() -> dict[str, Any]:
             "gene_pathway_weight_rule": "1 / sqrt(mapped_gene_count)",
         },
         "mapping": {
-            "gene_universe_path": "outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_gene_panel.tsv",
+            "gene_universe_path": "Experiment/core_code/outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_gene_panel.tsv",
             "gene_symbol_column": "gene_symbol",
             "ensembl_gene_column": "gene_id",
             "allow_alias_fallback": True,
         },
         "string": {
             "version": "12.0",
-            "links_path": "datasets/string_v12/raw/9606.protein.links.v12.0.txt.gz",
-            "aliases_path": "datasets/string_v12/raw/9606.protein.aliases.v12.0.txt.gz",
-            "info_path": "datasets/string_v12/raw/9606.protein.info.v12.0.txt.gz",
+            "links_path": "Experiment/datasets/string_v12/raw/9606.protein.links.v12.0.txt.gz",
+            "aliases_path": "Experiment/datasets/string_v12/raw/9606.protein.aliases.v12.0.txt.gz",
+            "info_path": "Experiment/datasets/string_v12/raw/9606.protein.info.v12.0.txt.gz",
             "download_page": "https://version-12-0.string-db.org/cgi/download",
         },
         "kegg": {
             "base_url": "https://rest.kegg.jp",
             "fetch_live_if_missing": True,
-            "gene_catalog_path": "datasets/kegg_hsa/raw/list_hsa.tsv",
-            "pathway_list_path": "datasets/kegg_hsa/raw/pathway_list_hsa.tsv",
-            "pathway_links_path": "datasets/kegg_hsa/raw/link_pathway_hsa.tsv",
-            "pathway_catalog_path": "datasets/kegg_hsa/raw/pathway_catalog_hsa.tsv",
+            "gene_catalog_path": "Experiment/datasets/kegg_hsa/raw/list_hsa.tsv",
+            "pathway_list_path": "Experiment/datasets/kegg_hsa/raw/pathway_list_hsa.tsv",
+            "pathway_links_path": "Experiment/datasets/kegg_hsa/raw/link_pathway_hsa.tsv",
+            "pathway_catalog_path": "Experiment/datasets/kegg_hsa/raw/pathway_catalog_hsa.tsv",
             "include_top_level_classes": [
                 "Cellular Processes",
                 "Environmental Information Processing",
@@ -63,7 +63,7 @@ def build_default_config() -> dict[str, Any]:
             "max_mapped_genes": 300,
         },
         "output": {
-            "root_dir": "outputs/priors/string_kegg_v1",
+            "root_dir": "Experiment/core_code/outputs/priors/string_kegg_v1",
             "prefix": "string_kegg_v1",
         },
     }
@@ -94,9 +94,9 @@ def discover_project_root(start: Path) -> Path:
     if current.is_file():
         current = current.parent
     for candidate in [current, *current.parents]:
-        if (candidate / "configs").is_dir() and (candidate / "scripts").is_dir() and (candidate / "models").is_dir():
+        if (candidate / "instance.json").exists():
             return candidate
-    raise SystemExit("Could not locate project root via repository structure")
+    raise SystemExit("Could not locate project root via instance.json")
 
 
 def resolve_path(base_dir: Path, value: str | None) -> Path | None:

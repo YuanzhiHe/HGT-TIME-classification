@@ -3,38 +3,38 @@
 
 # Phase 1: Multimodal contrastive pretraining
 phase1_pretrain:
-  config: configs/pretraining/pretrain_combined.yaml
-  output_dir: outputs/pretrain
+  config: Experiment/core_code/configs/pretraining/pretrain_combined.yaml
+  output_dir: Experiment/core_code/outputs/pretrain
   epochs: 50
   batch_size: 256
 
 # Phase 1 feature injection
 phase1_inject:
-  graphs_dir: outputs/hetero_graph/visium_breast__hetero_v1/graphs
+  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast__hetero_v1/graphs
   patches_dir: data/visium_patches
-  output_dir: outputs/hetero_graph/visium_breast__pretrain_aug/graphs
+  output_dir: Experiment/core_code/outputs/hetero_graph/visium_breast__pretrain_aug/graphs
   mode: concat  # concat | replace | add_attr
 
 # Phase 2: HGT-TIME fine-tuning
 phase2_finetune:
-  config: configs/hgt_time.default.yaml
+  config: Experiment/core_code/configs/hgt_time.default.yaml
   seeds: [42, 123, 2026]
 
 # Phase 3: Domain generalization training
 phase3_domain_gen:
-  config: configs/hgt_time_domain_gen.yaml
+  config: Experiment/core_code/configs/hgt_time_domain_gen.yaml
   seeds: [42, 123, 2026]
 
 # Phase 3: OOD evaluation
 phase3_ood_eval:
   cross_section:
     enabled: true
-    train_graphs: outputs/hetero_graph/visium_breast__hetero_v1/graphs
-    test_graphs: outputs/hetero_graph/section2__hetero_v1/graphs
-    config: configs/hgt_time_domain_gen.yaml
-    output: outputs/results/ood_cross_section.json
+    train_graphs: Experiment/core_code/outputs/hetero_graph/visium_breast__hetero_v1/graphs
+    test_graphs: Experiment/core_code/outputs/hetero_graph/section2__hetero_v1/graphs
+    config: Experiment/core_code/configs/hgt_time_domain_gen.yaml
+    output: Experiment/core_code/outputs/results/ood_cross_section.json
   lopo:
     enabled: false  # Requires multi-platform HEST-1k data
-    graphs_dir: outputs/hetero_graph/multi_platform/graphs
-    config: configs/hgt_time_domain_gen.yaml
-    output: outputs/results/ood_lopo.json
+    graphs_dir: Experiment/core_code/outputs/hetero_graph/multi_platform/graphs
+    config: Experiment/core_code/configs/hgt_time_domain_gen.yaml
+    output: Experiment/core_code/outputs/results/ood_lopo.json

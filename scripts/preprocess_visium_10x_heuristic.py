@@ -42,7 +42,7 @@ def require_anndata() -> Any:
     if ad is None:
         raise SystemExit(
             "anndata is required for Visium preprocessing. "
-            "Install dependencies from requirements-hetero.txt"
+            "Install dependencies from Experiment/core_code/requirements-hetero.txt"
         )
     return ad
 
@@ -52,9 +52,9 @@ def discover_project_root(start: Path) -> Path:
     if current.is_file():
         current = current.parent
     for candidate in [current, *current.parents]:
-        if (candidate / "configs").is_dir() and (candidate / "scripts").is_dir() and (candidate / "models").is_dir():
+        if (candidate / "instance.json").exists():
             return candidate
-    raise SystemExit("Could not locate project root via repository structure")
+    raise SystemExit("Could not locate project root via instance.json")
 
 
 def ensure_descendant(path: Path, project_root: Path) -> Path:

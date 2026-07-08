@@ -1,0 +1,44 @@
+kegg:
+  base_url: https://rest.kegg.jp
+  exclude_pathway_names:
+  - Metabolic pathways
+  - Pathways in cancer
+  - MicroRNAs in cancer
+  fetch_live_if_missing: false
+  gene_catalog_path: Experiment/datasets/kegg_hsa/raw/list_hsa.tsv
+  include_top_level_classes:
+  - Cellular Processes
+  - Environmental Information Processing
+  - Genetic Information Processing
+  - Metabolism
+  - Organismal Systems
+  max_mapped_genes: 300
+  min_mapped_genes: 5
+  pathway_catalog_path: Experiment/datasets/kegg_hsa/raw/pathway_catalog_hsa.tsv
+  pathway_links_path: Experiment/datasets/kegg_hsa/raw/link_pathway_hsa.tsv
+  pathway_list_path: Experiment/datasets/kegg_hsa/raw/pathway_list_hsa.tsv
+mapping:
+  allow_alias_fallback: true
+  ensembl_gene_column: gene_id
+  gene_symbol_column: gene_symbol
+  gene_universe_path: Experiment/core_code/outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_gene_panel.tsv
+output:
+  prefix: string_kegg_s400
+  root_dir: Experiment/core_code/outputs/priors/string_kegg_s400
+prior:
+  canonical_gene_id: gene_symbol
+  filter_to_gene_universe: true
+  gene_gene_score_sweep:
+  - 400
+  - 700
+  - 900
+  gene_gene_score_threshold: 400
+  gene_gene_weight_rule: combined_score / 1000.0
+  gene_pathway_weight_rule: 1 / sqrt(mapped_gene_count)
+  species_taxon_id: '9606'
+string:
+  aliases_path: Experiment/datasets/string_v12/raw/9606.protein.aliases.v12.0.txt.gz
+  download_page: https://version-12-0.string-db.org/cgi/download
+  info_path: Experiment/datasets/string_v12/raw/9606.protein.info.v12.0.txt.gz
+  links_path: Experiment/datasets/string_v12/raw/9606.protein.links.v12.0.txt.gz
+  version: '12.0'

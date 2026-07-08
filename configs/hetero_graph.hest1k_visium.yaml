@@ -1,8 +1,8 @@
 input:
   dataset_id: hest1k_visium_breast
-  scrna_manifest_path: outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_manifest.json
-  prior_manifest_path: outputs/priors/string_kegg_v1/string_kegg_v1__step-07_manifest.json
-  spatial_manifest_path: outputs/spatial/hest1k_visium__spatial_v1/hest1k_visium__spatial_v1__step-03_manifest.json
+  scrna_manifest_path: Experiment/core_code/outputs/scrna/gse161529__reference_v1/gse161529__reference_v1__step-08_manifest.json
+  prior_manifest_path: Experiment/core_code/outputs/priors/string_kegg_v1/string_kegg_v1__step-07_manifest.json
+  spatial_manifest_path: Experiment/core_code/outputs/spatial/hest1k_visium__spatial_v1/hest1k_visium__spatial_v1__step-03_manifest.json
   spatial_expression_path: null
   spatial_expression_gene_symbol_column: gene_symbol
   spatial_node_id_column: null
@@ -36,7 +36,7 @@ runtime:
   max_graphs: null
 
 output:
-  root_dir: outputs/hetero_graph/hest1k_visium__hetero_v1
+  root_dir: Experiment/core_code/outputs/hetero_graph/hest1k_visium__hetero_v1
   prefix: hest1k_visium__hetero_v1
 
 validation:

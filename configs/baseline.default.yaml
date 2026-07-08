@@ -1,5 +1,5 @@
 input:
-  graphs_dir: "outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs"
+  graphs_dir: "Experiment/core_code/outputs/hetero_graph/visium_breast_regions__hetero_v1/graphs"
 
 runtime:
   batch_size: 4

@@ -16,7 +16,7 @@ def build_default_config() -> dict[str, Any]:
     return {
         "dataset": {
             "dataset_id": "gse161529",
-            "input_path": "datasets/gse161529/processed/input.h5ad",
+            "input_path": "Experiment/datasets/gse161529/processed/input.h5ad",
             "input_format": "auto",
             "species": "human",
             "gene_symbol_column": None,
@@ -77,7 +77,7 @@ def build_default_config() -> dict[str, Any]:
             },
         },
         "output": {
-            "root_dir": "outputs/scrna/gse161529__reference_v1",
+            "root_dir": "Experiment/core_code/outputs/scrna/gse161529__reference_v1",
             "prefix": "gse161529__reference_v1",
             "graph_feature_space": "pca",
             "graph_feature_dims": 32,
@@ -106,7 +106,7 @@ def require_scanpy() -> tuple[Any, Any]:
     except ModuleNotFoundError as exc:
         raise SystemExit(
             "scanpy is required to run this pipeline. "
-            "Install dependencies from requirements-scrna.txt"
+            "Install dependencies from Experiment/core_code/requirements-scrna.txt"
         ) from exc
     return sc, sce
 
@@ -141,9 +141,9 @@ def discover_project_root(start: Path) -> Path:
     if current.is_file():
         current = current.parent
     for candidate in [current, *current.parents]:
-        if (candidate / "configs").is_dir() and (candidate / "scripts").is_dir() and (candidate / "models").is_dir():
+        if (candidate / "instance.json").exists():
             return candidate
-    raise SystemExit("Could not locate project root via repository structure")
+    raise SystemExit("Could not locate project root via instance.json")
 
 
 def write_yaml(path: Path, payload: dict[str, Any]) -> None:

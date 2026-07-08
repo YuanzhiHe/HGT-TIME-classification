@@ -25,7 +25,7 @@ def build_default_config() -> dict[str, Any]:
     return {
         "dataset": {
             "dataset_id": "visium_breast",
-            "input_path": "datasets/spatial/processed/input.h5ad",
+            "input_path": "Experiment/datasets/spatial/processed/input.h5ad",
             "input_format": "auto",
             "node_id_column": None,
             "patient_id_column": "patient_id",
@@ -84,7 +84,7 @@ def build_default_config() -> dict[str, Any]:
             "variants_to_export": ["scaled_radius", "knn", "delaunay", "permuted_primary"],
         },
         "output": {
-            "root_dir": "outputs/spatial/visium_breast__spatial_v1",
+            "root_dir": "Experiment/core_code/outputs/spatial/visium_breast__spatial_v1",
             "prefix": "visium_breast__spatial_v1",
         },
         "validation": {
@@ -119,9 +119,9 @@ def discover_project_root(start: Path) -> Path:
     if current.is_file():
         current = current.parent
     for candidate in [current, *current.parents]:
-        if (candidate / "configs").is_dir() and (candidate / "scripts").is_dir() and (candidate / "models").is_dir():
+        if (candidate / "instance.json").exists():
             return candidate
-    raise SystemExit("Could not locate project root via repository structure")
+    raise SystemExit("Could not locate project root via instance.json")
 
 
 def resolve_path(base_dir: Path, value: str | None) -> Path | None:
@@ -164,7 +164,7 @@ def require_anndata() -> Any:
         import anndata as ad  # type: ignore
     except ModuleNotFoundError as exc:  # pragma: no cover - handled at runtime
         raise SystemExit(
-            "anndata is required for .h5ad input. Install requirements-spatial.txt"
+            "anndata is required for .h5ad input. Install Experiment/core_code/requirements-spatial.txt"
         ) from exc
     return ad
 
@@ -515,7 +515,7 @@ def build_delaunay_edges(
     distances: np.ndarray,
 ) -> tuple[dict[tuple[int, int], float], dict[str, float]]:
     if Delaunay is None:
-        raise SystemExit("scipy is required for Delaunay adjacency. Install requirements-spatial.txt")
+        raise SystemExit("scipy is required for Delaunay adjacency. Install Experiment/core_code/requirements-spatial.txt")
 
     edge_map: dict[tuple[int, int], float] = {}
     if len(coords) < 3:

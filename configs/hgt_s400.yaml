@@ -1,0 +1,52 @@
+experiment_id: "EXP-STRING-S400"
+model_family: hgt_time
+
+input:
+  graphs_dir: Experiment/core_code/outputs/hetero_graph/visium_breast_regions__s400/graphs
+
+runtime:
+  batch_size: 4
+  shuffle: true
+  topk: 10
+  inject_mock_targets: false
+  epochs: 100
+  learning_rate: 1e-3
+  weight_decay: 1e-5
+  seed: 42
+  num_workers: 4
+  eval_every: 1
+  patience: 15
+  scheduler: "cosine"
+  scheduler_kwargs:
+    T_max: 100
+
+model:
+  hidden_dim: 128
+  num_layers: 3
+  num_heads: 4
+  dropout: 0.2
+  num_classes: 3
+  pheno_dim: 4
+  use_pheno_head: true
+  use_cell_state_head: false
+  cell_state_dim: 4
+  use_ranking_heads: true
+
+loss:
+  classification_weight: 1.0
+  phenotype_weight: 0.3
+  region_weight: 0.0
+  ranking_weight: 0.1
+  label_smoothing: 0.05
+  huber_delta: 1.0
+  max_ranking_pairs_per_graph: 256
+  class_weights: null
+
+split:
+  unit: "graph_id"
+  n_folds: 5
+  inner_folds: 3
+
+targets:
+  gene_positive_ids: []
+  pathway_positive_ids: []
