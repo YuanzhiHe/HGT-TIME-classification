@@ -40,6 +40,8 @@ configs/            experiment, preprocessing, graph, ablation, and fusion confi
   pretraining/      multimodal pretraining configs
 models/             HGT-TIME model, baselines, losses, graph transforms, fusion, DG
 scripts/            preprocessing, training, evaluation, ablation, interpretability
+resources/          gene panel used by the clinical readout
+results/            metric JSONs backing the reported numbers
   pretraining/      GraphCL / multimodal pretraining entry points
 requirements*.txt   aggregate (requirements.txt) and per-stage requirement files
 ```
@@ -161,6 +163,39 @@ python scripts/interpretability_analysis.py --config configs/hgt_time.default.ya
 ```
 
 `scripts/subtype_consensus_ranking.py` computes per-phenotype ranking consensus.
+
+## Powered colorectal cohort, label efficiency, and clinical readout
+
+These scripts back the colorectal benchmark, the label-efficiency analysis, and the deployable
+panel readout. They share the leakage-controlled protocol used elsewhere in the repository:
+`StratifiedGroupKFold` grouped by sample, multiple seeds, and metrics averaged over fold-seed pairs.
+
+```bash
+# Five-model benchmark on the 719-region colorectal cohort
+python scripts/benchmark_colorectal.py --out outputs/results/colorectal_benchmark.json
+# Same benchmark with inverse-frequency class weights applied to every model
+python scripts/benchmark_colorectal.py --class-weighted --out outputs/results/colorectal_benchmark_cw.json
+
+# Label efficiency: subsample the training split at the sample level and retrain
+python scripts/learning_curve_colorectal.py     # graph, homogeneous graph, and MLP
+python scripts/learning_curve_gbm.py            # gradient boosting on pooled region features
+
+# Hyperparameter and class-imbalance sweep for the graph
+python scripts/tune_colorectal.py
+
+# Component ablations evaluated in the low-label regime
+python scripts/lowlabel_mechanism.py
+
+# Label stability under signature and threshold perturbation
+python scripts/signature_sensitivity.py
+
+# Graph-free 35-gene panel readout (laptop, no GPU)
+python scripts/clinical_readout.py --input sample.h5ad --out-dir report/
+```
+
+`resources/clinical_panel.tsv` lists the 35 panel genes and their modules. The metric JSONs written
+by these scripts are kept under `results/` so the reported numbers can be checked without rerunning
+the training.
 
 ## Model interface
 
