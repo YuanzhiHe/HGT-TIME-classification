@@ -1,0 +1,72 @@
+{
+  "full": {
+    "0.1": {
+      "auroc": 0.6676816795035184,
+      "sd": 0.11528386520514929,
+      "n_runs": 10,
+      "approx_train_regions": 58
+    },
+    "1.0": {
+      "auroc": 0.7947050550960599,
+      "sd": 0.04449467952586232,
+      "n_runs": 10,
+      "approx_train_regions": 575
+    }
+  },
+  "no spatial edges": {
+    "0.1": {
+      "auroc": 0.6464073099340666,
+      "sd": 0.1414811402192758,
+      "n_runs": 10,
+      "approx_train_regions": 58
+    },
+    "1.0": {
+      "auroc": 0.7941318913458139,
+      "sd": 0.052683721014642484,
+      "n_runs": 10,
+      "approx_train_regions": 575
+    }
+  },
+  "no pathway nodes": {
+    "0.1": {
+      "auroc": 0.693649528414633,
+      "sd": 0.12752727426103108,
+      "n_runs": 10,
+      "approx_train_regions": 58
+    },
+    "1.0": {
+      "auroc": 0.7937425689425804,
+      "sd": 0.0478039563042589,
+      "n_runs": 10,
+      "approx_train_regions": 575
+    }
+  },
+  "no prior edges": {
+    "0.1": {
+      "auroc": 0.676112184282091,
+      "sd": 0.1478255181052817,
+      "n_runs": 10,
+      "approx_train_regions": 58
+    },
+    "1.0": {
+      "auroc": 0.8069446445159618,
+      "sd": 0.03462984769390242,
+      "n_runs": 10,
+      "approx_train_regions": 575
+    }
+  },
+  "no gene nodes": {
+    "0.1": {
+      "auroc": 0.6540910114274212,
+      "sd": 0.14914978704608423,
+      "n_runs": 10,
+      "approx_train_regions": 58
+    },
+    "1.0": {
+      "auroc": 0.7798300408330292,
+      "sd": 0.036190132916695865,
+      "n_runs": 10,
+      "approx_train_regions": 575
+    }
+  }
+}
