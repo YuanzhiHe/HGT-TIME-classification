@@ -1,0 +1,57 @@
+{
+  "expression": "section-aligned",
+  "cell_expression_features": 48,
+  "source_script": "scripts/hgt_time/ensemble_eval.py",
+  "graph_tag": "newcancer_colorectal_secnorm2",
+  "recorded_result_configuration": {
+    "tag": "newcancer_colorectal_secnorm2",
+    "config": {
+      "hidden_dim": 128,
+      "num_layers": 3,
+      "num_heads": 8,
+      "dropout": 0.1,
+      "num_classes": 3,
+      "pheno_dim": 4,
+      "use_pheno_head": false,
+      "use_cell_state_head": false,
+      "cell_state_dim": 4,
+      "use_ranking_heads": false
+    },
+    "lr": 0.0003,
+    "seeds": [
+      42,
+      123,
+      7
+    ],
+    "single_mean": 0.8864019520701433,
+    "single_sd": 0.04849870726308714,
+    "ensemble_mean": 0.8960606417968637,
+    "ensemble_sd": 0.04426539779735549,
+    "ensemble_macro_f1": 0.5338278820714938,
+    "ensemble_bal_acc": 0.531656997902574
+  },
+  "seeds": [
+    42,
+    123,
+    7
+  ],
+  "aggregation": "average seed-specific class probabilities within each fold, then score five fold ensembles",
+  "evidence_id": "HGT-CRC-E48",
+  "id_definition": "Configuration catalogue identifier.",
+  "split": {
+    "algorithm": "StratifiedGroupKFold",
+    "n_splits": 5,
+    "shuffle": false,
+    "random_state": null,
+    "group_field": "sample_id",
+    "group_unit": "sample",
+    "input_order": "sorted graph file paths"
+  },
+  "graph_content_manifest": null,
+  "saved_fold_assignment_file": null,
+  "original_training_logs": null,
+  "original_run_uuid": null,
+  "configuration_source": "model, tag, seeds and learning rate recorded in ensemble_FINAL.json; other run-time CLI options are not recorded in that JSON",
+  "exact_historical_command": null,
+  "training_wrapper": "scripts/hgt_time/train_eval_pipeline.py"
+}

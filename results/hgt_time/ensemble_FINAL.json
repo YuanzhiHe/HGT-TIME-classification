@@ -1,0 +1,27 @@
+{
+  "tag": "newcancer_colorectal_secnorm2",
+  "config": {
+    "hidden_dim": 128,
+    "num_layers": 3,
+    "num_heads": 8,
+    "dropout": 0.1,
+    "num_classes": 3,
+    "pheno_dim": 4,
+    "use_pheno_head": false,
+    "use_cell_state_head": false,
+    "cell_state_dim": 4,
+    "use_ranking_heads": false
+  },
+  "lr": 0.0003,
+  "seeds": [
+    42,
+    123,
+    7
+  ],
+  "single_mean": 0.8864019520701433,
+  "single_sd": 0.04849870726308714,
+  "ensemble_mean": 0.8960606417968637,
+  "ensemble_sd": 0.04426539779735549,
+  "ensemble_macro_f1": 0.5338278820714938,
+  "ensemble_bal_acc": 0.531656997902574
+}

@@ -1,0 +1,81 @@
+{
+  "expression": "section-aligned",
+  "cell_expression_features": 8,
+  "source_script": "scripts/hgt_time/hvg_bcc.py",
+  "models": {
+    "HGT-TIME": [
+      "hgt_time",
+      {
+        "hidden_dim": 128,
+        "num_layers": 3,
+        "num_heads": 8,
+        "dropout": 0.1,
+        "num_classes": 3,
+        "pheno_dim": 4,
+        "use_pheno_head": false,
+        "use_cell_state_head": false,
+        "cell_state_dim": 4,
+        "use_ranking_heads": false
+      },
+      0.0003
+    ],
+    "Homogeneous GCN": [
+      "homogeneous_graph",
+      {
+        "hidden_dim": 128,
+        "num_classes": 3,
+        "num_layers": 2,
+        "dropout": 0.2,
+        "conv_type": "gcn"
+      },
+      0.001
+    ],
+    "Non-graph MLP": [
+      "non_graph",
+      {
+        "hidden_dim": 128,
+        "num_classes": 3,
+        "num_layers": 3,
+        "dropout": 0.2
+      },
+      0.001
+    ]
+  },
+  "loss": {
+    "classification_weight": 1.0,
+    "phenotype_weight": 0.0,
+    "region_weight": 0.0,
+    "ranking_weight": 0.0,
+    "label_smoothing": 0.05,
+    "class_weights": null
+  },
+  "seeds": [
+    42
+  ],
+  "graph_tag": "bcc_sn_hvg8",
+  "runtime": {
+    "batch_size": 32,
+    "epochs": 50,
+    "weight_decay": 0.0001,
+    "patience": 8,
+    "scheduler": "cosine",
+    "T_max": 50,
+    "learning_rate": "model-specific: HGT 0.0003, GCN/MLP 0.001"
+  },
+  "evidence_id": "HGT-BCC-S08",
+  "id_definition": "Configuration catalogue identifier.",
+  "split": {
+    "algorithm": "StratifiedGroupKFold",
+    "n_splits": 5,
+    "shuffle": false,
+    "random_state": null,
+    "group_field": "sample_id",
+    "group_unit": "patient, as specified in manuscript",
+    "input_order": "sorted graph file paths"
+  },
+  "graph_content_manifest": null,
+  "saved_fold_assignment_file": null,
+  "original_training_logs": null,
+  "original_run_uuid": null,
+  "training_wrapper": "scripts/hgt_time/train_eval_pipeline.py"
+}

@@ -1,0 +1,146 @@
+[
+ [
+  0.8597687581557033,
+  {
+   "batch_size": 8,
+   "weight_decay": 0.0001,
+   "epochs": 80,
+   "label_smoothing": 0.05
+  }
+ ],
+ [
+  0.8597005499843643,
+  {
+   "batch_size": 8,
+   "weight_decay": 0.0001,
+   "epochs": 140,
+   "label_smoothing": 0.05
+  }
+ ],
+ [
+  0.859686388556045,
+  {
+   "batch_size": 16,
+   "weight_decay": 1e-05,
+   "epochs": 140,
+   "label_smoothing": 0.05
+  }
+ ],
+ [
+  0.8596850869991189,
+  {
+   "batch_size": 16,
+   "weight_decay": 1e-05,
+   "epochs": 80,
+   "label_smoothing": 0.05
+  }
+ ],
+ [
+  0.859455797169487,
+  {
+   "batch_size": 8,
+   "weight_decay": 1e-05,
+   "epochs": 80,
+   "label_smoothing": 0.05
+  }
+ ],
+ [
+  0.859455797169487,
+  {
+   "batch_size": 8,
+   "weight_decay": 1e-05,
+   "epochs": 140,
+   "label_smoothing": 0.05
+  }
+ ],
+ [
+  0.859317466333931,
+  {
+   "batch_size": 16,
+   "weight_decay": 0.0001,
+   "epochs": 140,
+   "label_smoothing": 0.05
+  }
+ ],
+ [
+  0.8592894645418164,
+  {
+   "batch_size": 16,
+   "weight_decay": 0.0001,
+   "epochs": 80,
+   "label_smoothing": 0.05
+  }
+ ],
+ [
+  0.8585977080520831,
+  {
+   "batch_size": 8,
+   "weight_decay": 0.0001,
+   "epochs": 80,
+   "label_smoothing": 0.0
+  }
+ ],
+ [
+  0.8585977080520831,
+  {
+   "batch_size": 8,
+   "weight_decay": 0.0001,
+   "epochs": 140,
+   "label_smoothing": 0.0
+  }
+ ],
+ [
+  0.8581863803245223,
+  {
+   "batch_size": 8,
+   "weight_decay": 1e-05,
+   "epochs": 80,
+   "label_smoothing": 0.0
+  }
+ ],
+ [
+  0.8581863803245223,
+  {
+   "batch_size": 8,
+   "weight_decay": 1e-05,
+   "epochs": 140,
+   "label_smoothing": 0.0
+  }
+ ],
+ [
+  0.8572254659460024,
+  {
+   "batch_size": 16,
+   "weight_decay": 1e-05,
+   "epochs": 140,
+   "label_smoothing": 0.0
+  }
+ ],
+ [
+  0.857148731753246,
+  {
+   "batch_size": 16,
+   "weight_decay": 1e-05,
+   "epochs": 80,
+   "label_smoothing": 0.0
+  }
+ ],
+ [
+  0.8565649783652254,
+  {
+   "batch_size": 16,
+   "weight_decay": 0.0001,
+   "epochs": 140,
+   "label_smoothing": 0.0
+  }
+ ],
+ [
+  0.8565495633942056,
+  {
+   "batch_size": 16,
+   "weight_decay": 0.0001,
+   "epochs": 80,
+   "label_smoothing": 0.0
+  }
+ ]
+]

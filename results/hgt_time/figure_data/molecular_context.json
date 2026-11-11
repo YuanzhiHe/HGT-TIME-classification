@@ -1,0 +1,42 @@
+{
+  "ranking": {
+    "gene_spearman": 0.569,
+    "pathway_spearman": 0.855,
+    "gene_jaccard50": 0.476,
+    "pathway_jaccard50": 0.737,
+    "checkpoints": 15
+  },
+  "perturbation": {
+    "top_k": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "top_to_random_ratio": [
+      6.8,
+      5.9,
+      5.1,
+      4.2,
+      3.6
+    ]
+  },
+  "CAF": {
+    "CRC": {
+      "Cold": 0.369,
+      "Hot": 0.627,
+      "Excluded": 0.922
+    },
+    "Lung": {
+      "Cold": 0.303,
+      "Hot": 0.407,
+      "Excluded": 1.065
+    }
+  },
+  "manuscript_locations": {
+    "ranking": "Supplementary Table S3; results/hgt_time/supplementary_tables.tex, tab:rank",
+    "perturbation": "Figure 5b",
+    "CAF": "Figure 6b; panel gene definitions in Supplementary Table S1"
+  }
+}

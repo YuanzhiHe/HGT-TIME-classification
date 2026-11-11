@@ -1,0 +1,381 @@
+\begin{table}[!ht]
+\centering
+\caption{Signature genes and phenotype definitions. Site-level signature scores are the mean
+expression of the represented genes. $Q_q$ denotes the $q$th percentile within the section at
+the analysis unit used by the specified rule.}
+\label{tab:sig}
+\small
+\begin{tabularx}{\linewidth}{@{}p{2.8cm}X@{}}
+\toprule
+Signature & Genes \\
+\midrule
+Immune infiltration & CD3D, CD3E, TRBC1, TRBC2, NKG7, GNLY, PRF1, IFNG, CXCL9, CXCL10,
+CXCL13, MS4A1, CD79A, LST1, FCER1G, TYROBP \\
+Immune penetration & CXCL9, CXCL10, CXCL11, IFNG, STAT1, IRF1, CCL5, CXCL13 \\
+Immune activation & IFNG, STAT1, IRF1, CXCL9, CXCL10, CXCL11, GZMB, PRF1, HLA-A, HLA-B,
+B2M, TAP1 \\
+Stromal retention & COL1A1, COL1A2, COL3A1, TAGLN, ACTA2, THY1, DCN, LUM, TGFB1, TGFBI,
+FN1, CXCL12 \\
+Fibroblast panel & FAP, PDGFRB, PDGFRA, POSTN, SPARC, CTHRC1, COL5A1, COL6A1, COL10A1,
+COL11A1, MMP2, MMP11, INHBA, VIM \\
+\bottomrule
+\end{tabularx}
+\medskip
+\begin{minipage}{\linewidth}\small
+\textbf{Conjunctive site-level rule: colorectal graph cohort and breast benchmark.}
+Hot: infiltration $\geq Q_{50}$, penetration $\geq Q_{60}$, activation $\geq Q_{50}$ and
+retention $<Q_{75}$. Excluded: infiltration $\geq Q_{50}$, penetration $\leq Q_{40}$ and
+retention $\geq Q_{60}$. Cold: infiltration $\leq Q_{40}$ and activation $\leq Q_{40}$.
+Sites matching one condition contribute to the colorectal graphs; the regional label is their
+majority phenotype.
+
+\smallskip
+\textbf{Two-signature region-level rule: basal cell carcinoma and complementary pan-cancer
+signature analyses.} Hot if infiltration $\geq Q_{66}$; otherwise Excluded if retention
+$\geq Q_{60}$; otherwise Cold. Scores are averaged over the region before thresholds are applied.
+\end{minipage}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Cohorts and region definitions. Grid tiling uses quantile cuts along each coordinate
+axis; its side is $\max(4,\lfloor\sqrt{n/30}\rfloor)$ in the colorectal and lung construction.
+BCC denotes basal cell carcinoma.}
+\label{tab:regions}
+\small
+\begin{tabularx}{\linewidth}{@{}Xllrl@{}}
+\toprule
+Cohort & Tiling & Minimum & Regions & Groups \\
+\midrule
+Colorectal, HEST-1k & grid & 25 sites & 719 & 53 samples \\
+BCC, GSE291246 & $200\,\mu$m & 25 cells & 5140 & 6 patients \\
+Lung, HEST-1k & grid & 25 sites & 72 & 4 samples \\
+Melanoma, GSE300445 & $6\times6$ sites & 15 sites & 572 & 4 sections \\
+Breast benchmark & $12\times12$ grid & 25 sites & 36 & 1 block \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Molecular ranking measurements from the breast benchmark model with auxiliary ranking
+heads. Stability is measured across 15 checkpoints.}
+\label{tab:rank}
+\small
+\begin{tabularx}{\linewidth}{@{}Xc@{}}
+\toprule
+Quantity & Value \\
+\midrule
+Gene ranking, Spearman $\rho$ & 0.569 \\
+Pathway ranking, Spearman $\rho$ & 0.855 \\
+Gene ranking, top-50 Jaccard & 0.476 \\
+Pathway ranking, top-50 Jaccard & 0.737 \\
+Top-ranked/random-gene perturbation shift ratio & $3$--$7$ \\
+Held-out ranking-target genes recovered in top 50 & $3/5$ \\
+CXCL10 position after removal from ranking targets & 1 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Search settings for the separate section-aligned colorectal configuration. Three
+inner folds are formed from the training samples of outer fold zero. The selected setting is
+reused for the five-fold grouped evaluation.}
+\label{tab:tune}
+\small
+\begin{tabularx}{\linewidth}{@{}p{2.5cm}cX@{}}
+\toprule
+Search stage & Best inner AUROC & Selected setting \\
+\midrule
+First, 32 settings & 0.848 & hidden dimension 128; 3 layers; 8 heads; dropout 0.1;
+learning rate $3\times10^{-4}$ \\
+Second, 16 settings & 0.860 & batch size 8; weight decay $10^{-4}$; 80 epochs;
+label smoothing 0.05 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Three-seed probability ensembling on section-aligned colorectal graphs with 48
+expression features per cell node. The single-model summary pools runs; the ensemble summary
+scores the average seed probability once within each fold. SD describes runs and folds,
+respectively.}
+\label{tab:ens}
+\small
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule
+Configuration & Macro-AUROC & Macro-F1 & Bal.\ Acc. \\
+\midrule
+Single model, mean over runs & $0.886\pm0.048$ & --- & --- \\
+Three-seed ensemble & $\mathbf{0.896\pm0.044}$ & 0.534 & 0.532 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Region-scale sensitivity. Labels are mapped back to measurement sites before
+comparison. Cohen's $\kappa$ is summarised as median and range across the contributing sections.}
+\label{tab:scale}
+\small
+\begin{tabularx}{\linewidth}{@{}Xlcc@{}}
+\toprule
+Cohort & Region-size pair & Sections & Cohen's $\kappa$ \\
+\midrule
+Colorectal, Visium & $6\times6$ vs $8\times8$ & 6 & 0.648 (0.592--0.717) \\
+ & $6\times6$ vs $12\times12$ & 5 & 0.626 (0.542--0.703) \\
+ & $8\times8$ vs $12\times12$ & 5 & 0.584 (0.530--0.720) \\
+\midrule
+BCC, Xenium & $100$ vs $200\,\mu$m & 6 & 0.606 (0.422--0.750) \\
+ & $200$ vs $400\,\mu$m & 6 & 0.521 (0.290--0.726) \\
+ & $100$ vs $400\,\mu$m & 6 & 0.387 (0.252--0.647) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Colorectal graph-model comparison at two training-set sizes with eight expression
+features per cell node. Complete training samples are subsampled within each fold. Region
+counts are approximate; values are mean $\pm$ SD over five folds and two seeds.}
+\label{tab:labels}
+\small
+\begin{tabularx}{\linewidth}{@{}Xcc@{}}
+\toprule
+Model & Approximately 58 regions & Approximately 575 regions \\
+\midrule
+HGT-TIME & $\mathbf{0.733\pm0.067}$ & $\mathbf{0.903\pm0.059}$ \\
+Homogeneous GCN & $0.670\pm0.057$ & $0.775\pm0.051$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Complementary cross-patient and cross-platform evaluations. The cross-patient Visium
+experiment is leave-one-patient-out recognition of Hot and Cold. Cross-platform evaluation
+trains on Visium and evaluates on Xenium. Bold indicates the highest displayed value within
+each setting and metric.}
+\label{tab:transfer}
+\small
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule
+Model & AUROC & Macro-F1 & Bal.\ Acc. \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Cross-patient, Visium}} \\
+MLP & $\mathbf{0.926}$ & 0.607 & 0.675 \\
+Homogeneous GCN & 0.905 & 0.586 & 0.652 \\
+HGT-TIME & 0.894 & $\mathbf{0.716}$ & $\mathbf{0.742}$ \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Cross-platform, Visium to Xenium}} \\
+MLP & $\mathbf{0.872}$ & $\mathbf{0.678}$ & $\mathbf{0.703}$ \\
+HGT with pretrained features & 0.871 & 0.578 & 0.631 \\
+HGT-TIME & 0.809 & 0.569 & 0.626 \\
+\bottomrule
+\end{tabularx}
+\medskip
+\begin{tabularx}{\linewidth}{@{}Xccccc@{}}
+\toprule Held-out patient & P0 & P1 & P2 & P3 & P4 \\
+\midrule
+MLP & 0.741 & 0.592 & 0.728 & 0.500 & 0.812 \\
+HGT-TIME & 0.880 & 0.538 & 0.715 & 0.754 & 0.823 \\
+\bottomrule
+\end{tabularx}
+\smallskip
+\noindent Patient-resolved values are balanced accuracy, averaged over three seeds per patient.
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Signature-level associations in melanoma immunotherapy cohorts. Response $P$ values
+are from two-sided Mann--Whitney tests. OS HR is the univariate Cox overall-survival hazard
+ratio per standard deviation of the signature score, followed by its two-sided $P$ value.
+Counts denote responders/non-responders. $P$ values are unadjusted.}
+\label{tab:clin}
+\small
+\begin{tabularx}{\linewidth}{@{}Xcc@{}}
+\toprule
+Cohort and treatment & Response $P$ & OS HR ($P$) \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Immune infiltration}} \\
+Hugo 2016, anti-PD-1 (14/13) & 0.90 & 1.08 (0.85) \\
+Liu 2019, anti-PD-1 (47/56) & 0.082 & 0.73 (0.018) \\
+Van Allen 2015, anti-CTLA-4 (8/13) & 0.044 & 0.40 (0.012) \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Immune exclusion}} \\
+Hugo 2016, anti-PD-1 (14/13) & 0.18 & 1.06 (0.84) \\
+Liu 2019, anti-PD-1 (47/56) & 0.38 & 1.15 (0.27) \\
+Van Allen 2015, anti-CTLA-4 (8/13) & 0.020 & 2.64 (0.019) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Mean macro-AUROC across cell-feature dimensions. The colorectal experiment uses five
+sample-grouped folds and two seeds. The basal cell carcinoma experiment uses five patient-grouped
+folds. Bold indicates the highest mean within each cohort and feature dimension.}
+\label{tab:budget}
+\begin{spacing}{1.0}\small
+\begin{tabularx}{\linewidth}{@{}Xrrrr@{}}
+\toprule
+Expression features per cell & 8 & 16 & 32 & 48 \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{Colorectal: 719 regions, 53 samples}} \\
+HGT-TIME & $\mathbf{0.903}$ & $\mathbf{0.893}$ & $\mathbf{0.889}$ & $\mathbf{0.874}$ \\
+Homogeneous GCN & 0.775 & 0.810 & 0.843 & 0.852 \\
+MLP & 0.739 & 0.813 & 0.844 & 0.846 \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{Basal cell carcinoma: 5140 regions, 6 patients}} \\
+HGT-TIME & $\mathbf{0.873}$ & $\mathbf{0.849}$ & $\mathbf{0.802}$ & $\mathbf{0.785}$ \\
+Homogeneous GCN & 0.561 & 0.609 & 0.548 & 0.542 \\
+MLP & 0.582 & 0.551 & 0.543 & 0.496 \\
+\bottomrule
+\end{tabularx}
+\end{spacing}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Schema and objective variants on the breast benchmark. Values are mean $\pm$ SD
+across fifteen fold--seed runs. The full model and all eight evaluated variants are shown.}
+\label{tab:ablation}
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule Variant & Macro-AUROC & Macro-F1 & Bal.\ Acc. \\
+\midrule
+Full model & $0.781\pm0.104$ & $0.342\pm0.205$ & $0.444\pm0.156$ \\
+No spatial edges & $0.784\pm0.099$ & $0.267\pm0.144$ & $0.372\pm0.139$ \\
+Permuted spatial & $0.725\pm0.105$ & $0.347\pm0.127$ & $0.437\pm0.095$ \\
+No pathway nodes & $0.769\pm0.113$ & $0.309\pm0.139$ & $0.407\pm0.105$ \\
+No PPI edges & $0.753\pm0.088$ & $0.248\pm0.075$ & $0.365\pm0.069$ \\
+Homogeneous collapse & $0.735\pm0.094$ & $0.251\pm0.101$ & $0.369\pm0.086$ \\
+No ranking loss & $0.749\pm0.083$ & $0.287\pm0.140$ & $0.400\pm0.117$ \\
+No phenotype head & $0.779\pm0.092$ & $0.327\pm0.173$ & $0.419\pm0.123$ \\
+No label smoothing & $0.747\pm0.117$ & $0.296\pm0.154$ & $0.398\pm0.121$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Biological-prior and graph-construction comparisons on the breast benchmark.
+The matched prior comparison holds the training configuration and folds fixed. The two
+construction sweeps vary one graph-construction parameter at a time. Values are recorded
+mean metrics from the breast configurations.}
+\label{tab:prior_extensions}
+\small
+\textbf{Matched prior comparison}\\[4pt]
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule Prior & Macro-AUROC & Macro-F1 & Bal.\ Acc. \\
+\midrule
+STRING interactions and KEGG pathways & 0.706 & 0.266 & 0.389 \\
+With TRRUST regulatory edges & \textbf{0.723} & \textbf{0.328} & \textbf{0.430} \\
+\bottomrule
+\end{tabularx}
+\medskip
+\textbf{Graph-construction sweeps}\\[4pt]
+\begin{tabularx}{\linewidth}{@{}Xll@{}}
+\toprule Parameter & Values & Mean macro-AUROC \\
+\midrule
+Cell-to-gene expression neighbours & 16 / 32 / 64 / 128 & 0.745 / 0.820 / 0.781 / 0.800 \\
+STRING confidence threshold & 400 / 700 / 900 & 0.755 / 0.781 / 0.761 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Gene-specific measurements from the breast ranking analysis. Checkpoint frequency
+is the fraction of fifteen checkpoints in which a gene appears in the top fifty.
+$\Delta p$ is the reported mean probability change under gene-node perturbation, rounded
+to three decimals. The held-out experiment ranks 609 genes after removing five genes
+from the ranking targets.}
+\label{tab:gene_examples}
+\small
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule Gene & Rank & Top-50 frequency & $\Delta p$ \\
+\midrule
+CXCL10 & 1 & 1.00 & $-0.001$ \\
+TYROBP & 6 & 1.00 & $+0.013$ \\
+CCL2 & 13 & 0.93 & $+0.000$ \\
+CTNNB1 & 14 & 0.93 & $+0.003$ \\
+CCL5 & 16 & 0.93 & $+0.000$ \\
+TGFB1 & 17 & 0.93 & $+0.000$ \\
+B2M & 20 & 0.80 & $+0.009$ \\
+CXCL12 & 25 & 0.80 & $+0.000$ \\
+\bottomrule
+\end{tabularx}
+\medskip
+\begin{tabularx}{\linewidth}{@{}Xccccc@{}}
+\toprule Held-out gene & CXCL10 & CXCL11 & CTNNB1 & LYZ & VEGFA \\
+\midrule
+Rank among 609 genes & 1 & 27 & 46 & 107 & 367 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Per-section fibroblast-panel expression summaries. The basal cell carcinoma
+expression analysis contains 5227 regions across seventeen sections from six patients;
+its region occupancy threshold is specified in Methods~S6. The melanoma series contains
+572 regions in four sections. Values are means within the specified phenotype.}
+\label{tab:external_expression}
+\small
+\begin{tabularx}{\linewidth}{@{}Xrrrrr@{}}
+\toprule Section (patient) & Sites & Regions & Cold & Hot & Excluded \\
+\midrule
+\multicolumn{6}{@{}l}{\textit{Basal cell carcinoma, GSE291246}} \\
+GSM8831617 (su001) & 484,917 & 1477 & 1.05 & 1.90 & 2.39 \\
+GSM8831627 (su001) & 480,218 & 1514 & 1.04 & 1.91 & 2.40 \\
+GSM8831639 (su002) & 16,559 & 79 & 0.01 & 0.03 & 0.02 \\
+GSM8831645 (su002) & 26,752 & 78 & 1.96 & 2.54 & 3.12 \\
+GSM8831646 (su002) & 10,049 & 58 & 1.14 & 2.27 & 2.54 \\
+GSM8831637 (su005) & 70,598 & 237 & 2.93 & 2.89 & 3.56 \\
+GSM8831641 (su005) & 62,334 & 225 & 2.64 & 2.79 & 3.42 \\
+GSM8831642 (su005) & 69,023 & 235 & 2.68 & 2.76 & 3.25 \\
+GSM8831643 (su005) & 217,330 & 234 & 0.34 & 0.42 & 0.61 \\
+GSM8831644 (su005) & 64,126 & 124 & 0.39 & 0.45 & 1.40 \\
+GSM8831640 (su006) & 10,137 & 27 & 2.11 & 2.73 & 2.69 \\
+GSM8831638 (su007) & 15,087 & 53 & 0.78 & 1.82 & 1.94 \\
+GSM8831647 (su007) & 51,534 & 134 & 2.29 & 2.62 & 3.25 \\
+GSM8831648 (su008) & 45,256 & 187 & 1.29 & 2.46 & 2.94 \\
+GSM8831649 (su008) & 34,270 & 178 & 1.44 & 2.22 & 2.47 \\
+GSM8831650 (su008) & 70,943 & 225 & 0.15 & 0.63 & 0.55 \\
+GSM8831651 (su008) & 55,549 & 162 & 0.10 & 0.63 & 0.43 \\
+\midrule\multicolumn{6}{@{}l}{\textit{Melanoma, GSE300445}} \\
+AdjIII-0019 & 2,539 & 122 & 1.19 & 1.30 & 1.31 \\
+AdjIII-0022 & 2,783 & 134 & 1.13 & 1.17 & 1.21 \\
+AdjIII-0113 & 2,145 & 98 & 1.50 & 1.51 & 1.65 \\
+AdjIII-0133 & 4,115 & 218 & 1.11 & 1.15 & 1.15 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Matched melanoma bulk-expression analysis in sixty patients from GSE300793.
+Correlations use the standardised signature scores. Tertiles are defined by the fibroblast
+panel and contain twenty patients each.}
+\label{tab:bulk_expression}
+\small
+\begin{tabularx}{\linewidth}{@{}Xc@{}}
+\toprule Signature pair & Pearson $r$ \\
+\midrule
+Stromal retention and fibroblast panel & 0.832 \\
+Immune infiltration and stromal retention & 0.442 \\
+Immune infiltration and fibroblast panel & 0.195 \\
+\bottomrule
+\end{tabularx}
+\medskip
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule Fibroblast-panel tertile & Low & Middle & High \\
+\midrule
+Patients & 20 & 20 & 20 \\
+Mean stromal retention & $-0.640$ & $+0.054$ & $+0.586$ \\
+Mean immune infiltration & $-0.189$ & $-0.043$ & $+0.232$ \\
+\bottomrule
+\end{tabularx}
+\end{table}

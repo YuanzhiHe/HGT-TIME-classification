@@ -1,0 +1,654 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-11",
+  "repository_snapshot": {
+    "url": "https://github.com/YuanzhiHe/HGT-TIME-classification",
+    "commit": "14fbd3fa91b5aacae96b99c2543825ecd6b58ea7",
+    "historical_run_code_commit": null
+  },
+  "status": "Published configuration and aggregate result index",
+  "id_policy": "HGT-* identifiers label configurations. Original execution IDs are stored separately when available.",
+  "records": [
+    {
+      "manuscript_item": "Table 1 / Figure 2a",
+      "evidence_id": "HGT-CRC-S08",
+      "source_files": [
+        "results/hgt_time/hvg_budget_sweep.json"
+      ],
+      "json_pointer_or_location": "/8",
+      "cohort": "colorectal",
+      "config_snapshot": "configs/hgt_time/HGT-CRC-S08.json",
+      "config_status": "Configuration snapshot",
+      "data_version": {
+        "public_resource": "HEST-1k/GSE291246 as relevant",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": ""
+    },
+    {
+      "manuscript_item": "Table 1 / Figure 2b",
+      "evidence_id": "HGT-BCC-S08",
+      "source_files": [
+        "results/hgt_time/hvg_budget_sweep_BCC.json"
+      ],
+      "json_pointer_or_location": "/8",
+      "cohort": "basal cell carcinoma",
+      "config_snapshot": "configs/hgt_time/HGT-BCC-S08.json",
+      "config_status": "Configuration snapshot",
+      "data_version": {
+        "public_resource": "HEST-1k/GSE291246 as relevant",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": ""
+    },
+    {
+      "manuscript_item": "Table 2, Absolute / Figure 3a,c",
+      "evidence_id": "HGT-CRC-A48",
+      "source_files": [
+        "results/colorectal_benchmark.json"
+      ],
+      "json_pointer_or_location": "/HGT-TIME",
+      "cohort": "colorectal",
+      "config_snapshot": "configs/hgt_time/HGT-CRC-A48.json",
+      "config_status": "Configuration snapshot",
+      "data_version": {
+        "public_resource": "HEST-1k/GSE291246 as relevant",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Public repository snapshot 14fbd3fa91b5aacae96b99c2543825ecd6b58ea7; HGT 0.792867791 rounds to 0.793. The GCN result in this file belongs to the absolute-expression benchmark."
+    },
+    {
+      "manuscript_item": "Table 2, Section-aligned / Figure 3a,c",
+      "evidence_id": "HGT-CRC-S48",
+      "source_files": [
+        "results/hgt_time/hvg_budget_sweep.json",
+        "results/hgt_time/colorectal_learning_curve_secnorm.json",
+        "results/hgt_time/main_tables.tex"
+      ],
+      "json_pointer_or_location": "/48/HGT-TIME; /HGT-TIME/1.0; F1 and balanced accuracy: main_tables.tex, tab:scale",
+      "cohort": "colorectal",
+      "config_snapshot": "configs/hgt_time/HGT-CRC-S48.json",
+      "config_status": "Configuration snapshot",
+      "data_version": {
+        "public_resource": "HEST-1k/GSE291246 as relevant",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "AUROC stored at full precision; F1 and balanced accuracy stored in the numerical table."
+    },
+    {
+      "manuscript_item": "Table 2, Tuned ensemble / Table S5",
+      "evidence_id": "HGT-CRC-E48",
+      "source_files": [
+        "results/hgt_time/ensemble_FINAL.json"
+      ],
+      "json_pointer_or_location": "/ensemble_mean, /ensemble_sd, /ensemble_macro_f1, /ensemble_bal_acc",
+      "cohort": "colorectal",
+      "config_snapshot": "configs/hgt_time/HGT-CRC-E48.json",
+      "config_status": "Configuration snapshot",
+      "data_version": {
+        "public_resource": "HEST-1k/GSE291246 as relevant",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": ""
+    },
+    {
+      "manuscript_item": "Table 3",
+      "evidence_id": "HGT-BREAST-BENCH",
+      "source_files": [
+        "results/hgt_time/main_tables.tex"
+      ],
+      "json_pointer_or_location": "tab:breast",
+      "cohort": "breast",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Five folds and seeds 42, 123, 2026. Numerical summary in main_tables.tex, label tab:breast."
+    },
+    {
+      "manuscript_item": "Table S1",
+      "evidence_id": "HGT-LABEL-DEFINITIONS",
+      "source_files": [
+        "results/hgt_time/supplementary_tables.tex"
+      ],
+      "json_pointer_or_location": "tab:sig",
+      "cohort": "all",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Signature and label definition table; training-run fields are not applicable."
+    },
+    {
+      "manuscript_item": "Table S2",
+      "evidence_id": "HGT-COHORT-DEFINITIONS",
+      "source_files": [
+        "results/hgt_time/supplementary_tables.tex"
+      ],
+      "json_pointer_or_location": "tab:regions",
+      "cohort": "all",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Cohort and geometry definitions."
+    },
+    {
+      "manuscript_item": "Table S3 / Figure 5a,b",
+      "evidence_id": "HGT-BREAST-RANK",
+      "source_files": [
+        "results/hgt_time/figure_data/molecular_context.json",
+        "results/hgt_time/figure_data/restored_evidence.json"
+      ],
+      "json_pointer_or_location": "/ranking and /perturbation; /heldout_genes",
+      "cohort": "breast",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Fifteen checkpoints; auxiliary ranking model."
+    },
+    {
+      "manuscript_item": "Table S4",
+      "evidence_id": "HGT-CRC-TUNING",
+      "source_files": [
+        "results/hgt_time/tune2_secnorm2.json",
+        "results/hgt_time/supplementary_tables.tex"
+      ],
+      "json_pointer_or_location": "second-stage candidates; tab:tune includes first-stage retained summary",
+      "cohort": "colorectal",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "HEST-1k/GSE291246 as relevant",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Two-stage search: tune_norm.py and tune2.py. First-stage numerical summary: supplementary_tables.tex, tab:tune."
+    },
+    {
+      "manuscript_item": "Table S6 / Figure 4c,d",
+      "evidence_id": "HGT-REGION-GEOMETRY",
+      "source_files": [
+        "results/hgt_time/region_scale_sensitivity.json"
+      ],
+      "json_pointer_or_location": "section-wise kappa entries; tab:scale",
+      "cohort": "colorectal and basal cell carcinoma",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Label agreement across region geometries; section counts are given in Table S6."
+    },
+    {
+      "manuscript_item": "Table S7 / Figure 3b",
+      "evidence_id": "HGT-CRC-L08",
+      "source_files": [
+        "results/hgt_time/decisive_hvg8.json"
+      ],
+      "json_pointer_or_location": "/0.1 and /1.0",
+      "cohort": "colorectal",
+      "config_snapshot": "configs/hgt_time/HGT-CRC-L08.json",
+      "config_status": "Configuration snapshot",
+      "data_version": {
+        "public_resource": "HEST-1k/GSE291246 as relevant",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "0.902555316 rounds to 0.903; this separate training-size experiment is distinct from the K=8 sweep mean 0.902592307. Historical colorectal_learning_curve.json uses absolute-expression graphs and its default runtime."
+    },
+    {
+      "manuscript_item": "Table S8 / Figure S3",
+      "evidence_id": "HGT-TRANSFER",
+      "source_files": [
+        "results/hgt_time/figure_data/restored_evidence.json"
+      ],
+      "json_pointer_or_location": "/cross_patient, /cross_platform, /per_patient",
+      "cohort": "breast and Xenium",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Per-patient balanced accuracy averages three seeds."
+    },
+    {
+      "manuscript_item": "Table S9 / Figure S1",
+      "evidence_id": "HGT-CLINICAL-SIGNATURES",
+      "source_files": [
+        "results/hgt_time/figure_data/restored_evidence.json"
+      ],
+      "json_pointer_or_location": "/clinical",
+      "cohort": "melanoma",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Signature-level response/survival analysis; training-run fields are not applicable."
+    },
+    {
+      "manuscript_item": "Table S10 / Figure 2c,d",
+      "evidence_id": "HGT-HVG-SWEEPS",
+      "source_files": [
+        "results/hgt_time/hvg_budget_sweep.json",
+        "results/hgt_time/hvg_budget_sweep_BCC.json",
+        "results/hgt_time/hvg_budget_sweep_BCC_mid.json"
+      ],
+      "json_pointer_or_location": "/8, /16, /32, /48",
+      "cohort": "colorectal and basal cell carcinoma",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "hvg_sweep.py, hvg_bcc.py and hvg_bcc_mid.py are retained; see S08/S48 configuration records."
+    },
+    {
+      "manuscript_item": "Table S11 / Figure 4a",
+      "evidence_id": "HGT-BREAST-ABLATION",
+      "source_files": [
+        "results/hgt_time/figure_data/breast_ablation.json"
+      ],
+      "json_pointer_or_location": "/rows",
+      "cohort": "breast",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Full model and eight variants; five folds and seeds 42, 123, 2026."
+    },
+    {
+      "manuscript_item": "Table S12 / Figure 4b / Figure S2",
+      "evidence_id": "HGT-BREAST-PRIORS",
+      "source_files": [
+        "results/hgt_time/figure_data/restored_evidence.json"
+      ],
+      "json_pointer_or_location": "/knowledge and /construction",
+      "cohort": "breast",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Matched TF-prior comparison and construction sweeps are separate experiment settings."
+    },
+    {
+      "manuscript_item": "Table S13 / Figure 5c,d",
+      "evidence_id": "HGT-BREAST-GENES",
+      "source_files": [
+        "results/hgt_time/figure_data/restored_evidence.json"
+      ],
+      "json_pointer_or_location": "/gene_examples and /heldout_genes",
+      "cohort": "breast",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": ""
+    },
+    {
+      "manuscript_item": "Table S14 / Figure 6c",
+      "evidence_id": "HGT-EXTERNAL-EXPRESSION",
+      "source_files": [
+        "results/hgt_time/figure_data/restored_evidence.json"
+      ],
+      "json_pointer_or_location": "/external_expression",
+      "cohort": "basal cell carcinoma and melanoma",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Complementary expression occupancy threshold is twenty cells for BCC; primary classification uses twenty-five. Training-run fields not applicable."
+    },
+    {
+      "manuscript_item": "Table S15 / Figure 6d",
+      "evidence_id": "HGT-BULK-EXPRESSION",
+      "source_files": [
+        "results/hgt_time/figure_data/restored_evidence.json"
+      ],
+      "json_pointer_or_location": "/bulk",
+      "cohort": "melanoma",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "see table/source",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "60 patients; expression correlations; training-run fields not applicable."
+    },
+    {
+      "manuscript_item": "Figure 6a",
+      "evidence_id": "HGT-CRC-MARKER",
+      "source_files": [
+        "results/hgt_time/figure_data/marker_heatmap.json"
+      ],
+      "json_pointer_or_location": "/n and /z",
+      "cohort": "colorectal",
+      "config_snapshot": null,
+      "config_status": "Table or aggregate summary",
+      "data_version": {
+        "public_resource": "HEST-1k/GSE291246 as relevant",
+        "processed_graph_sha256_manifest": null
+      },
+      "saved_split_file": null,
+      "training_log_file": null,
+      "original_run_id": null,
+      "notes": "Phenotype counts: Hot 27266, Excluded 12753, Cold 26635; total 66654."
+    }
+  ],
+  "file_sha256": {
+    "configs/hgt_time/HGT-BCC-S08.json": "c10b2d24517b907c7b83ab7e5adf6c5af3ec29ea8bce49f652bea7be3dbfa421",
+    "configs/hgt_time/HGT-CRC-A48.json": "9e99b67f66a2e9ae2b125bec962056a42ed6bce1394dea73cc8e3f22664a8175",
+    "configs/hgt_time/HGT-CRC-E48.json": "c9a6de4509ea6ab3c2e7e307d7fab860b7d682a697e4138f3110468960a65f75",
+    "configs/hgt_time/HGT-CRC-L08.json": "da06083627d310e8dd54e52cf7f2d98fd5e1b0e699a29650df3e5de87f363c87",
+    "configs/hgt_time/HGT-CRC-S08.json": "297696ab7353d5541c343b852ab15443e6cf08156a7af9e8db38ae6a9ea2ecdd",
+    "configs/hgt_time/HGT-CRC-S48.json": "2212b1871bc6dc4acc2554b5e7f0ba91194233a053c0d2f82f0ebbeb357faf1d",
+    "scripts/hgt_time/decisive.py": "8d4bd4ab9ec18c108a150a0d188b5ec81bdab0613fc1fb4e097140385e234e59",
+    "scripts/hgt_time/ensemble_eval.py": "b1cce7228dc9cc51c40a32f4d03f35adb7236b9fcd6832c7e01bf7a6263d3055",
+    "scripts/hgt_time/hvg_bcc.py": "c1f15eaadb8160a8931e7bbd76c33bda73f3de89ce621bb9d82f81488f0f0671",
+    "scripts/hgt_time/hvg_bcc_mid.py": "bb968dc2070f0da7832813f9f6c252a5a9766a311a98b4ab6f4d8a6f933f3646",
+    "scripts/hgt_time/hvg_sweep.py": "60e3ee687a32032f69d3f54e169657e345bffe1cd14ed6721c98f0ae0734d0e8",
+    "scripts/hgt_time/lc_norm.py": "fcfd98d0799bda30bd34cf13be6370ac44bedff2bb7afc290353ce25725c0d2b",
+    "scripts/hgt_time/train_eval_pipeline.py": "a1d771b6e1d5bdb00393a3fdbc2b8433b9e20a6ca6d190e949fa44c77dd47301",
+    "scripts/hgt_time/tune2.py": "1753e0c179807cbe0681ad734772f3ec5d813ec7a8cb848b84fcf6f321a68809",
+    "scripts/hgt_time/tune_norm.py": "917041de610d4f32aa5a79d480c1e3684434d8e3bd0aff2b6e66c00ca48ce1ef",
+    "results/hgt_time/colorectal_learning_curve_secnorm.json": "c4f061c9586d9468218f6af9c4b57724559e2b3213120e27b1fb0fd73fb36a3d",
+    "results/hgt_time/decisive_hvg8.json": "f7c28cbde70c47f9f570bc5c5d571323b396061dd0ca54b7b00fcde863e3637d",
+    "results/hgt_time/ensemble_FINAL.json": "ac4fcdc667ce60a98e30d64d1d6601ebee387f334396bab7709b79f9caecb6b1",
+    "results/hgt_time/figure_data/breast_ablation.json": "3ec00f328e82bc06c3d08bf4339064f5407cbc61c89066603e9f1ae7c380f3ac",
+    "results/hgt_time/figure_data/marker_heatmap.json": "26c6ce8fbd092d5a34659a8309b321645a22ab6b14bdf25136782688539b85ff",
+    "results/hgt_time/figure_data/molecular_context.json": "ab75cc2e5aef946df5651fdb5f14da0ba3ed9c7a5101b79b6883d3646fd3f2e1",
+    "results/hgt_time/figure_data/restored_evidence.json": "900302bd6e9762316773a59486dd1c6d8139c9fb4791d5365c1c5744c9972fc5",
+    "results/hgt_time/hvg_budget_sweep.json": "96232e0432e8f306247603595a5dbdc697a69a81a5064d7d92c16485db8eb097",
+    "results/hgt_time/hvg_budget_sweep_BCC.json": "6fe45fc9f843a971368002489b94ab0c8d8777dc5c6190f91f74e7bb1367c988",
+    "results/hgt_time/hvg_budget_sweep_BCC_mid.json": "ff03010e1a7d7ef0c5cba7c600f275aaa1e198848cea92f444ff80f9621666d3",
+    "results/hgt_time/main_tables.tex": "8876c0618183aa28a4b2a21f8a1240ffb68c7837f5797cc0fb2ecbda711fa112",
+    "results/hgt_time/region_scale_sensitivity.json": "2faab17c937a8eb3700fd8ce5fad8ca81d21104009d8caa2de02627fdc8d664b",
+    "results/hgt_time/supplementary_tables.tex": "0192ad3efd90d16288fd4a5dc70873fd5ed38ce4df04260c13062ab5b256c72f",
+    "results/hgt_time/tune2_secnorm2.json": "bbde8400c3cc7bf2903b68bbcb26b1fecb44262642400d45a4e6568ec4341633",
+    "results/colorectal_benchmark.json": "b1559843df7e18848e1b79e70c882fbbc7603fb1a6e03967e56fb86a33114253",
+    "results/colorectal_learning_curve.json": "c4a7f9b6d75190fb3e95e2b57a9c18e1d4e4d00977c279705244eac8036a914a",
+    "scripts/benchmark_colorectal.py": "5a7c6800b474a7b448cd589dc9615fe4861bb4cb74721fe8dc2d496d7988958c",
+    "scripts/train_eval_pipeline.py": "89815091d6c3f478320dfed18cf8c0f77eae6d031b2ba88721029ff8d2fbb59f"
+  },
+  "traceability_level": "aggregate_and_code_only",
+  "training_wrapper_snapshots": {
+    "current_public_script_sha256": "89815091d6c3f478320dfed18cf8c0f77eae6d031b2ba88721029ff8d2fbb59f",
+    "byte_identical": false,
+    "historical_execution_dependency_commit": null,
+    "manuscript_wrapper": "scripts/hgt_time/train_eval_pipeline.py",
+    "public_wrapper": "scripts/train_eval_pipeline.py",
+    "difference": "CLI default output and registry paths; training functions are unchanged.",
+    "manuscript_script_sha256": "a1d771b6e1d5bdb00393a3fdbc2b8433b9e20a6ca6d190e949fa44c77dd47301"
+  },
+  "metric_queries": [
+    {
+      "item": "Table 1 CRC",
+      "source": "results/hgt_time/hvg_budget_sweep.json",
+      "path": [
+        "8",
+        "HGT-TIME",
+        "auroc"
+      ],
+      "full_precision": 0.9025923070666716,
+      "reported_3dp": "0.903"
+    },
+    {
+      "item": "Table 1 CRC",
+      "source": "results/hgt_time/hvg_budget_sweep.json",
+      "path": [
+        "8",
+        "Homogeneous GCN",
+        "auroc"
+      ],
+      "full_precision": 0.7752693473091765,
+      "reported_3dp": "0.775"
+    },
+    {
+      "item": "Table 1 CRC",
+      "source": "results/hgt_time/hvg_budget_sweep.json",
+      "path": [
+        "8",
+        "Non-graph MLP",
+        "auroc"
+      ],
+      "full_precision": 0.7385984178600271,
+      "reported_3dp": "0.739"
+    },
+    {
+      "item": "Table 1 BCC",
+      "source": "results/hgt_time/hvg_budget_sweep_BCC.json",
+      "path": [
+        "8",
+        "HGT-TIME",
+        "auroc"
+      ],
+      "full_precision": 0.8726043628390222,
+      "reported_3dp": "0.873"
+    },
+    {
+      "item": "Table 1 BCC",
+      "source": "results/hgt_time/hvg_budget_sweep_BCC.json",
+      "path": [
+        "8",
+        "Homogeneous GCN",
+        "auroc"
+      ],
+      "full_precision": 0.5613075741433391,
+      "reported_3dp": "0.561"
+    },
+    {
+      "item": "Table 1 BCC",
+      "source": "results/hgt_time/hvg_budget_sweep_BCC.json",
+      "path": [
+        "8",
+        "Non-graph MLP",
+        "auroc"
+      ],
+      "full_precision": 0.5818072251046196,
+      "reported_3dp": "0.582"
+    },
+    {
+      "item": "Table 2 absolute",
+      "source": "results/colorectal_benchmark.json",
+      "path": [
+        "HGT-TIME",
+        "macro_auroc",
+        0
+      ],
+      "full_precision": 0.7928677912668605,
+      "reported_3dp": "0.793"
+    },
+    {
+      "item": "Table 2 aligned",
+      "source": "results/hgt_time/hvg_budget_sweep.json",
+      "path": [
+        "48",
+        "HGT-TIME",
+        "auroc"
+      ],
+      "full_precision": 0.8738155783018234,
+      "reported_3dp": "0.874"
+    },
+    {
+      "item": "Table 2 ensemble",
+      "source": "results/hgt_time/ensemble_FINAL.json",
+      "path": [
+        "ensemble_mean"
+      ],
+      "full_precision": 0.8960606417968637,
+      "reported_3dp": "0.896"
+    },
+    {
+      "item": "Table S7",
+      "source": "results/hgt_time/decisive_hvg8.json",
+      "path": [
+        "0.1",
+        "HGT-TIME",
+        0
+      ],
+      "full_precision": 0.7331618281107414,
+      "reported_3dp": "0.733"
+    },
+    {
+      "item": "Table S7",
+      "source": "results/hgt_time/decisive_hvg8.json",
+      "path": [
+        "0.1",
+        "Homogeneous GCN",
+        0
+      ],
+      "full_precision": 0.6698869293978242,
+      "reported_3dp": "0.670"
+    },
+    {
+      "item": "Table S7",
+      "source": "results/hgt_time/decisive_hvg8.json",
+      "path": [
+        "1.0",
+        "HGT-TIME",
+        0
+      ],
+      "full_precision": 0.9025553164571389,
+      "reported_3dp": "0.903"
+    },
+    {
+      "item": "Table S7",
+      "source": "results/hgt_time/decisive_hvg8.json",
+      "path": [
+        "1.0",
+        "Homogeneous GCN",
+        0
+      ],
+      "full_precision": 0.7753149168381859,
+      "reported_3dp": "0.775"
+    }
+  ],
+  "script_sources": {
+    "scripts/hgt_time/decisive.py": {
+      "original_sha256": "62ef2d0baabf5b219c0a336620b84a9248dcd22b9df57a18238831e98bcf168e",
+      "change": "Repository-relative imports; training and evaluation settings preserved."
+    },
+    "scripts/hgt_time/ensemble_eval.py": {
+      "original_sha256": "823d11738418e139dc44ae3dd339bff4b1af0d89538818b853e1a1083842256a",
+      "change": "Repository-relative imports; training and evaluation settings preserved."
+    },
+    "scripts/hgt_time/hvg_bcc.py": {
+      "original_sha256": "46c37d470019ed2c065362333ad5e14d1e12a67f84f187ef640b3f7ff31db6d5",
+      "change": "Repository-relative imports; training and evaluation settings preserved."
+    },
+    "scripts/hgt_time/hvg_bcc_mid.py": {
+      "original_sha256": "65d439083e5dfe96181257998792e89a74537a8a3ddb98c8a429f92b645c06bb",
+      "change": "Repository-relative imports; training and evaluation settings preserved."
+    },
+    "scripts/hgt_time/hvg_sweep.py": {
+      "original_sha256": "0f15c4fdbc00e469d395ab59ea40ead6d57c5ded1a3cc7a576bcc204abb68fa6",
+      "change": "Repository-relative imports; training and evaluation settings preserved."
+    },
+    "scripts/hgt_time/lc_norm.py": {
+      "original_sha256": "7e819204eeafad93ffb30388708a9cf99f83361a6be5dd59b580b92f7eaaa61a",
+      "change": "Repository-relative imports; training and evaluation settings preserved."
+    },
+    "scripts/hgt_time/tune2.py": {
+      "original_sha256": "255bf9192cf1f8e25ba2cc4423c50150f81ad7e44a7e861efb8dbb7a643a8c42",
+      "change": "Repository-relative imports; training and evaluation settings preserved."
+    },
+    "scripts/hgt_time/tune_norm.py": {
+      "original_sha256": "bb573cd43a9db52529682b5c7e8532d485d093c9a4edbe76489467c1659c0225",
+      "change": "Repository-relative imports; training and evaluation settings preserved."
+    }
+  },
+  "source_summaries": {
+    "results/hgt_time/figure_data/breast_ablation.json": {
+      "original_sha256": "c26c290f151ae6bb70597956e6846b5ac7b8743f5073e2680f5365e7974d5d7f",
+      "metadata_change": "Manuscript table and figure locations; numerical fields preserved."
+    },
+    "results/hgt_time/figure_data/molecular_context.json": {
+      "original_sha256": "04ede3ad8807217a10037b04088aaec13f9f1e06b09188b8f29f074406aa665c",
+      "metadata_change": "Manuscript table and figure locations; numerical fields preserved."
+    },
+    "results/hgt_time/figure_data/restored_evidence.json": {
+      "original_sha256": "67fe770efa7cbbc89a29fc394ef48baa1a8825c0fb7849b59090b5b1c540cbad",
+      "metadata_change": "Manuscript table and figure locations; numerical fields preserved."
+    }
+  }
+}

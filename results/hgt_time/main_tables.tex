@@ -1,0 +1,74 @@
+\begin{table}[!htbp]
+\centering
+\caption{Macro-AUROC with eight expression features per cell node. Values are mean $\pm$ SD
+across five folds and two seeds for colorectal and across five patient-grouped folds for basal
+cell carcinoma. Bold indicates the
+highest mean in each cohort. Differences use unrounded means.}
+\label{tab:main}
+\begin{spacing}{1.0}\normalsize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}Xcc@{}}
+\toprule
+Model & Colorectal & Basal cell carcinoma \\
+\midrule
+HGT-TIME & $\mathbf{0.903\pm0.059}$ & $\mathbf{0.873\pm0.071}$ \\
+Homogeneous GCN & $0.775\pm0.051$ & $0.561\pm0.103$ \\
+MLP & $0.739\pm0.029$ & $0.582\pm0.084$ \\
+\midrule
+Difference from GCN & $+0.127$ & $+0.311$ \\
+Difference from MLP & $+0.164$ & $+0.291$ \\
+\bottomrule
+\end{tabularx}
+\end{spacing}
+\end{table}
+
+\begin{table}[!tp]
+\centering
+\caption{Colorectal configurations with 48 expression features per cell node. The absolute-
+expression summary uses five folds and three seeds; the section-aligned summary uses five folds
+and two seeds. The tuned ensemble averages three seed-specific probability predictions within
+each of five folds. AUROC uncertainty is SD across runs for the first two rows and across folds
+for the ensemble.}
+\label{tab:scale}
+\begin{spacing}{1.0}\normalsize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule
+Configuration & Macro-AUROC & Macro-F1 & Bal.\ Acc. \\
+\midrule
+Absolute & $0.793\pm0.034$ & 0.435 & 0.468 \\
+Section-aligned & $0.874\pm0.052$ & 0.496 & 0.500 \\
+Tuned ensemble & $\mathbf{0.896\pm0.044}$ & $\mathbf{0.534}$ & $\mathbf{0.532}$ \\
+\bottomrule
+\end{tabularx}
+\end{spacing}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\caption{Breast benchmark model configurations. The experiment uses 36 regions, five folds
+and three seeds. Values are mean metrics. GraphST supplies unsupervised
+embeddings; Geneformer and scGPT supply pretrained representations. Bold marks the highest
+mean in each column.}
+\label{tab:breast}
+\begin{spacing}{1.0}\normalsize
+\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule Model & Macro-AUROC & Macro-F1 & Bal.\ Acc. \\
+\midrule
+Linear deconvolution & 0.621 & 0.204 & 0.333 \\
+MLP & 0.745 & 0.257 & 0.361 \\
+CNN, spatial raster & 0.675 & 0.385 & 0.426 \\
+GCN & 0.673 & 0.274 & 0.352 \\
+GAT & 0.618 & 0.297 & 0.383 \\
+GraphST embeddings & 0.504 & 0.332 & 0.354 \\
+Geneformer & 0.585 & 0.381 & 0.398 \\
+scGPT & 0.630 & 0.378 & 0.400 \\
+Pretrained expression embeddings & 0.726 & 0.233 & 0.357 \\
+MLP, class weighted & 0.736 & 0.354 & 0.439 \\
+GAT, class weighted & 0.649 & 0.404 & 0.456 \\
+Immune signature & 0.672 & \textbf{0.491} & \textbf{0.544} \\
+HGT-TIME & \textbf{0.781} & 0.342 & 0.444 \\
+\bottomrule
+\end{tabularx}
+\end{spacing}
+\end{table}

@@ -7,8 +7,17 @@ heterogeneous graph of cell, gene, and pathway nodes that integrates spatial adj
 expression, protein-protein interactions, pathway membership, and transcription-factor
 regulation, and the graph is encoded by a heterogeneous graph transformer.
 
-This repository contains source code and configuration files only. Datasets, cached downloads,
-model checkpoints, logs, and generated outputs are excluded from version control.
+This repository contains the model code, experiment configurations and aggregate result summaries. Raw datasets, processed graph caches, checkpoints and training logs are stored separately.
+
+## Manuscript results
+
+HGT-TIME reaches macro-AUROC **0.903** on the section-aligned colorectal K=8 configuration and **0.873** on the basal cell carcinoma K=8 configuration. See the [manuscript result index](README_MANUSCRIPT_RESULTS.md) for table-to-file mappings, full-precision results, configuration snapshots and experiment scripts.
+
+```bash
+python scripts/check_manuscript_results.py
+```
+
+The original absolute-expression benchmark remains under `results/colorectal_benchmark.json`; its HGT macro-AUROC is 0.793 at K=48. The section-aligned K=8 and K=48 results are under `results/hgt_time/`.
 
 ## Requirements
 
@@ -93,7 +102,9 @@ python scripts/train_eval_pipeline.py --run-all-registry --registry configs/expe
 python scripts/evaluate.py --results-dir outputs/results --format markdown
 ```
 
-## Training protocol
+## General training interface
+
+The defaults below apply to the general training command. Manuscript-specific settings and seeds are listed in [configs/hgt_time](configs/hgt_time) and the [result index](README_MANUSCRIPT_RESULTS.md).
 
 Baselines and the main model share `scripts/train_eval_pipeline.py`, so data splits, metrics, and
 logging are identical across models. Key settings, also stored in each config:
@@ -164,11 +175,9 @@ python scripts/interpretability_analysis.py --config configs/hgt_time.default.ya
 
 `scripts/subtype_consensus_ranking.py` computes per-phenotype ranking consensus.
 
-## Powered colorectal cohort, label efficiency, and clinical readout
+## Absolute-expression colorectal benchmark and panel readout
 
-These scripts back the colorectal benchmark, the label-efficiency analysis, and the deployable
-panel readout. They share the leakage-controlled protocol used elsewhere in the repository:
-`StratifiedGroupKFold` grouped by sample, multiple seeds, and metrics averaged over fold-seed pairs.
+These commands run the absolute-expression colorectal experiments and the panel readout. The colorectal benchmark and learning-curve scripts use `StratifiedGroupKFold` grouped by sample, with metrics averaged over fold-seed pairs. For the section-aligned experiments in Tables 1, 2 and S7, use the [manuscript scripts](README_MANUSCRIPT_RESULTS.md#experiment-scripts).
 
 ```bash
 # Five-model benchmark on the 719-region colorectal cohort
@@ -254,4 +263,4 @@ For pretraining data (ST-bank), see `scripts/pretraining/download_stbank.py`.
 
 ## License
 
-The code is released for academic research use. Add a license file of your choice before public distribution.
+The code is released for academic research use.

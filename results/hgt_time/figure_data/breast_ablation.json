@@ -1,0 +1,116 @@
+{
+  "columns": [
+    "variant",
+    "auroc",
+    "auroc_sd",
+    "f1",
+    "f1_sd",
+    "balanced_accuracy",
+    "ba_sd",
+    "p_raw",
+    "p_holm"
+  ],
+  "rows": [
+    [
+      "Full model",
+      0.781,
+      0.104,
+      0.342,
+      0.205,
+      0.444,
+      0.156,
+      null,
+      null
+    ],
+    [
+      "No spatial edges",
+      0.784,
+      0.099,
+      0.267,
+      0.144,
+      0.372,
+      0.139,
+      0.937,
+      1.0
+    ],
+    [
+      "Permuted spatial",
+      0.725,
+      0.105,
+      0.347,
+      0.127,
+      0.437,
+      0.095,
+      0.064,
+      0.32
+    ],
+    [
+      "No pathway nodes",
+      0.769,
+      0.113,
+      0.309,
+      0.139,
+      0.407,
+      0.105,
+      0.382,
+      1.0
+    ],
+    [
+      "No PPI edges",
+      0.753,
+      0.088,
+      0.248,
+      0.075,
+      0.365,
+      0.069,
+      0.136,
+      0.544
+    ],
+    [
+      "Homogeneous collapse",
+      0.735,
+      0.094,
+      0.251,
+      0.101,
+      0.369,
+      0.086,
+      0.043,
+      0.344
+    ],
+    [
+      "No ranking loss",
+      0.749,
+      0.083,
+      0.287,
+      0.14,
+      0.4,
+      0.117,
+      0.05,
+      0.344
+    ],
+    [
+      "No phenotype head",
+      0.779,
+      0.092,
+      0.327,
+      0.173,
+      0.419,
+      0.123,
+      1.0,
+      1.0
+    ],
+    [
+      "No label smoothing",
+      0.747,
+      0.117,
+      0.296,
+      0.154,
+      0.398,
+      0.121,
+      0.045,
+      0.344
+    ]
+  ],
+  "protocol": "36 breast regions; 5 folds x 3 seeds; auxiliary ranking and phenotype heads",
+  "manuscript_locations": "Supplementary Table S11; results/hgt_time/supplementary_tables.tex, tab:ablation"
+}
